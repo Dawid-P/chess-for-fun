@@ -97,16 +97,6 @@ export default function Home() {
       <div className={styles.container}>
         <aside className={styles.aside}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h3>Date</h3>
-            <label>From</label>
-            <input
-              type="month"
-              placeholder="From"
-              {...register("date-from", {})}
-            />
-            <label>To</label>
-            <input type="month" placeholder="To" {...register("date-to", {})} />
-
             <h3>Openings by</h3>
             <input {...register("openings", {})} type="radio" value="code" />
             <label>Code</label>
