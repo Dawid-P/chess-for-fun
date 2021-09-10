@@ -1,6 +1,8 @@
-import axios from "axios";
-
 const chessData = (json, dateFrom, dateTo, username) => {
+  // Variables
+  let allGames = [];
+  let games = [];
+  let allGamesWithECO = [];
   // Take all months archive and slice the array to months selected by user
   dateFrom = dateFrom.replace("-", "/");
   dateTo = dateTo.replace("-", "/");
@@ -14,17 +16,14 @@ const chessData = (json, dateFrom, dateTo, username) => {
   let slicedData = data.slice(dateFromIndex, dateToIndex + 1);
 
   // Extract all games for months selected by user
-  let allGames = [];
+  const fetcher = async (url) => fetch(url).then((res) => res.json());
 
   async function sequentialCall(monthsArray) {
-    console.log(monthsArray.length);
     for (let item of monthsArray) {
-      axios.get(item).then(function (response) {
-        allGames.push(response.data.games);
-      });
+      games = await fetcher(item);
+      allGames.push(...games.games);
     }
   }
-
   sequentialCall(slicedData);
 
   return allGames;
