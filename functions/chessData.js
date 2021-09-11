@@ -1,8 +1,9 @@
+const pgnParser = require("pgn-parser");
 const chessData = async (json, dateFrom, dateTo, username) => {
   // Variables
   let allGames = [];
   let games = [];
-  let dataIsReady = false;
+  let id = 1;
   // Take all months archive and slice the array to months selected by user
   dateFrom = dateFrom.replace("-", "/");
   dateTo = dateTo.replace("-", "/");
@@ -22,12 +23,21 @@ const chessData = async (json, dateFrom, dateTo, username) => {
     for (let item of slicedData) {
       games = await fetcher(item);
       allGames.push(...games.games);
-      console.log(allGames.length);
     }
-    dataIsReady = true;
-    console.log(dataIsReady, "allGames within call:  ", allGames.length);
+  }
+  // Structure data for frontend
+  async function structureChessData(allGames) {
+    for (let item of allGames) {
+      let [pgnView] = pgnParser.parse(item.pgn);
+      item.ECO = pgnView.headers[9].value;
+      item.opening = pgnView.headers[10].value;
+      item.id = id;
+      delete item.pgn;
+      id++;
+    }
   }
   await sequentialCall(slicedData);
+  await structureChessData(allGames);
 
   return allGames;
 };

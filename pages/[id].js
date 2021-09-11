@@ -8,7 +8,6 @@ const UserStats = ({ data }) => {
   return (
     <>
       <Navbar />
-      <h1>My data is very long: {data.length}</h1>
       <Main />
     </>
   );
@@ -26,9 +25,7 @@ export async function getServerSideProps({ params, query }) {
   );
   if (response.ok) {
     let json = await response.json();
-    console.log(json.archives.length, username, dateFrom, dateTo);
     data = await chessData(json, dateFrom, dateTo, username);
-    console.log("Data in [id].js:  ", data.length);
   } else {
     console.log("Username does not exist, try again");
   }
