@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import chessData from "../functions/chessData";
 import { useState } from "react";
 const pgnParser = require("pgn-parser");
@@ -10,25 +12,27 @@ const Navbar = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
 
-  let allGamesWithECO = [];
-
-  const [count, setCount] = useState(allGamesWithECO.length);
   const [data, setData] = useState([]);
 
-  const onSubmit = async ({ username, dateFrom, dateTo }) => {
-    let response = await fetch(
-      `https://api.chess.com/pub/player/${username}/games/archives`
-    );
-    if (response.ok) {
-      let json = await response.json();
+  const onSubmit = ({ username, dateFrom, dateTo }) => {
+    let goToStatsPage = `/${username}?from=${dateFrom}&to=${dateTo}`;
 
-      let data1 = chessData(json, dateFrom, dateTo, username);
-      setData(data1);
-      console.log(data1);
-    } else {
-      alert("Username does not exist, try again");
-    }
+    router.push(goToStatsPage);
+
+    // let response = await fetch(
+    //   `https://api.chess.com/pub/player/${username}/games/archives`
+    // );
+    // if (response.ok) {
+    //   let json = await response.json();
+
+    //   let data1 = chessData(json, dateFrom, dateTo, username);
+    //   setData(data1);
+    //   console.log(data1);
+    // } else {
+    //   alert("Username does not exist, try again");
+    // }
   };
   return (
     <nav>
@@ -43,7 +47,6 @@ const Navbar = () => {
         <label>To</label>
         <input type="month" {...register("dateTo", { required: true })} />
       </form>
-      <h1>AllgameswithECO count: {data.length}</h1>
     </nav>
   );
 };

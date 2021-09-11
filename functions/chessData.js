@@ -1,8 +1,8 @@
-const chessData = (json, dateFrom, dateTo, username) => {
+const chessData = async (json, dateFrom, dateTo, username) => {
   // Variables
   let allGames = [];
   let games = [];
-  let allGamesWithECO = [];
+  let dataIsReady = false;
   // Take all months archive and slice the array to months selected by user
   dateFrom = dateFrom.replace("-", "/");
   dateTo = dateTo.replace("-", "/");
@@ -18,13 +18,16 @@ const chessData = (json, dateFrom, dateTo, username) => {
   // Extract all games for months selected by user
   const fetcher = async (url) => fetch(url).then((res) => res.json());
 
-  async function sequentialCall(monthsArray) {
-    for (let item of monthsArray) {
+  async function sequentialCall(slicedData) {
+    for (let item of slicedData) {
       games = await fetcher(item);
       allGames.push(...games.games);
+      console.log(allGames.length);
     }
+    dataIsReady = true;
+    console.log(dataIsReady, "allGames within call:  ", allGames.length);
   }
-  sequentialCall(slicedData);
+  await sequentialCall(slicedData);
 
   return allGames;
 };
