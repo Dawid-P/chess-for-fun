@@ -4,11 +4,10 @@ import Main from "../components/Main";
 import chessData from "../functions/chessData";
 
 const UserStats = ({ data }) => {
-  console.log(data);
   return (
     <>
       <Navbar />
-      <Main />
+      <Main chessData={data} />
     </>
   );
 };

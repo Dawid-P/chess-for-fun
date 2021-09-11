@@ -2,7 +2,8 @@ import React from "react";
 import styles from "../styles/Home.module.css";
 import { useForm } from "react-hook-form";
 
-const Main = () => {
+const Main = ({ chessData }) => {
+  console.log("main: ", chessData);
   const {
     register,
     handleSubmit,
