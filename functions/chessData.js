@@ -53,8 +53,50 @@ const chessData = async (json, dateFrom, dateTo, username) => {
     }
   }
 
+  // Add rating change data
+  async function addRatingChange(allGames) {
+    // Arrays with each time class
+    let timeClassArrays = { bullet: [], blitz: [], rapid: [], daily: [] };
+    for (let item of allGames) {
+      item.time_class === "bullet" && timeClassArrays.bullet.push(item);
+      item.time_class === "blitz" && timeClassArrays.blitz.push(item);
+      item.time_class === "rapid" && timeClassArrays.rapid.push(item);
+      item.time_class === "daily" && timeClassArrays.daily.push(item);
+    }
+
+    // Loop thorugh each array and add a rating change property
+    for (let arr in timeClassArrays) {
+      for (let item of timeClassArrays[arr]) {
+        let indexOfMatchBefore = timeClassArrays[arr].indexOf(item) - 1;
+        let ratingAfter = item.userRating;
+        let ratingBefore = ratingAfter;
+        if (indexOfMatchBefore !== -1) {
+          ratingBefore = timeClassArrays[arr][indexOfMatchBefore].userRating;
+        }
+
+        let difference = ratingAfter - ratingBefore;
+        console.log(
+          "TimeClass: ",
+          item.time_class,
+          "Ratings: ",
+          ratingBefore,
+          ratingAfter,
+          difference
+        );
+        item.userRatingChange = difference;
+      }
+    }
+    allGames = [
+      ...timeClassArrays.bullet,
+      ...timeClassArrays.blitz,
+      ...timeClassArrays.rapid,
+      ...timeClassArrays.daily,
+    ];
+  }
+
   await sequentialCall(slicedData);
   await structureChessData(allGames);
+  await addRatingChange(allGames);
 
   return allGames;
 };

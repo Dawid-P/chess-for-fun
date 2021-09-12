@@ -65,7 +65,7 @@ const Main = ({ chessData }) => {
           <input {...register("color", {})} type="radio" value="black" />
           <label>Black</label>
 
-          <h3>Time control</h3>
+          <h3>Time class</h3>
           <input
             type="checkbox"
             placeholder="Bullet"
