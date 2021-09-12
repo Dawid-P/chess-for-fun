@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import DataDisplay from "./DataDisplay";
 
 const Main = ({ chessData }) => {
   const {
@@ -9,41 +11,42 @@ const Main = ({ chessData }) => {
     formState: { errors },
   } = useForm();
 
-  let filteredChessData = [];
+  let [filteredChessData, setFilteredChessData] = useState(null);
 
   const filterChessData = (chessData, formData) => {
+    let finalData = [];
     for (let item of chessData) {
       if (formData.color === "white" && item.userColor === "white") {
         item.time_class === "bullet" &&
           formData.bullet === true &&
-          filteredChessData.push(item);
+          finalData.push(item);
         item.time_class === "blitz" &&
           formData.blitz === true &&
-          filteredChessData.push(item);
+          finalData.push(item);
         item.time_class === "rapid" &&
           formData.rapid === true &&
-          filteredChessData.push(item);
+          finalData.push(item);
         item.time_class === "daily" &&
           formData.daily === true &&
-          filteredChessData.push(item);
+          finalData.push(item);
       }
       if (formData.color === "black" && item.userColor === "black") {
         item.time_class === "bullet" &&
           formData.bullet === true &&
-          filteredChessData.push(item);
+          finalData.push(item);
         item.time_class === "blitz" &&
           formData.blitz === true &&
-          filteredChessData.push(item);
+          finalData.push(item);
         item.time_class === "rapid" &&
           formData.rapid === true &&
-          filteredChessData.push(item);
+          finalData.push(item);
         item.time_class === "daily" &&
           formData.daily === true &&
-          filteredChessData.push(item);
+          finalData.push(item);
       }
     }
 
-    console.log(filteredChessData);
+    setFilteredChessData(finalData);
   };
 
   const onSubmit = (formData) => {
@@ -98,7 +101,7 @@ const Main = ({ chessData }) => {
         </form>
       </aside>
       <main className={styles.main}>
-        <h1>Chess master</h1>
+        <DataDisplay data={filteredChessData} />
       </main>
     </div>
   );
