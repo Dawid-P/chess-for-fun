@@ -2,9 +2,11 @@ import React from "react";
 
 const DataDisplay = ({ data }) => {
   let ratingDifference = null;
-  data.forEach((element) => {
-    ratingDifference = ratingDifference + element.userRatingChange;
-  });
+  if (data) {
+    data.forEach((element) => {
+      ratingDifference = ratingDifference + element.userRatingChange;
+    });
+  }
   return (
     <div>
       <h1>Chess master</h1>
