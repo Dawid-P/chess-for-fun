@@ -3,13 +3,52 @@ import styles from "../styles/Home.module.css";
 import { useForm } from "react-hook-form";
 
 const Main = ({ chessData }) => {
-  console.log("main: ", chessData);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  let filteredChessData = [];
+
+  const filterChessData = (chessData, formData) => {
+    for (let item of chessData) {
+      if (formData.color === "white" && item.userColor === "white") {
+        item.time_class === "bullet" &&
+          formData.bullet === true &&
+          filteredChessData.push(item);
+        item.time_class === "blitz" &&
+          formData.blitz === true &&
+          filteredChessData.push(item);
+        item.time_class === "rapid" &&
+          formData.rapid === true &&
+          filteredChessData.push(item);
+        item.time_class === "daily" &&
+          formData.daily === true &&
+          filteredChessData.push(item);
+      }
+      if (formData.color === "black" && item.userColor === "black") {
+        item.time_class === "bullet" &&
+          formData.bullet === true &&
+          filteredChessData.push(item);
+        item.time_class === "blitz" &&
+          formData.blitz === true &&
+          filteredChessData.push(item);
+        item.time_class === "rapid" &&
+          formData.rapid === true &&
+          filteredChessData.push(item);
+        item.time_class === "daily" &&
+          formData.daily === true &&
+          filteredChessData.push(item);
+      }
+    }
+
+    console.log(filteredChessData);
+  };
+
+  const onSubmit = (formData) => {
+    filterChessData(chessData, formData);
+  };
   return (
     <div className={styles.container}>
       <aside className={styles.aside}>
@@ -50,10 +89,10 @@ const Main = ({ chessData }) => {
 
           <input
             type="checkbox"
-            placeholder="Classic"
-            {...register("classic", {})}
+            placeholder="Daily"
+            {...register("daily", {})}
           />
-          <label>Classic</label>
+          <label>Daily</label>
 
           <input type="submit" />
         </form>

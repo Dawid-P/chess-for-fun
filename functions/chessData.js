@@ -33,9 +33,26 @@ const chessData = async (json, dateFrom, dateTo, username) => {
       item.opening = pgnView.headers[10].value;
       item.id = id;
       delete item.pgn;
+      delete item.fen;
+      item.user = username.toLowerCase();
+
+      if (item.white.username.toLowerCase() === username) {
+        item.userColor = "white";
+        item.userResult = item.white.result;
+        item.userRating = item.white.rating;
+      }
+      if (item.black.username.toLowerCase() === username) {
+        item.userColor = "black";
+        item.userResult = item.black.result;
+        item.userRating = item.black.rating;
+      }
+      delete item.black;
+      delete item.white;
+      item.accuracies && delete item.accuracies;
       id++;
     }
   }
+
   await sequentialCall(slicedData);
   await structureChessData(allGames);
 
