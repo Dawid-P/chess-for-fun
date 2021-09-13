@@ -25,7 +25,7 @@ const DataDisplay = ({ data }) => {
 
           <ol>
             {openings.map((item) => (
-              <li>{item}</li>
+              <li key={openings.indexOf(item)}>{item}</li>
             ))}
           </ol>
         </div>
