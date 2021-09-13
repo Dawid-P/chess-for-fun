@@ -75,14 +75,6 @@ const chessData = async (json, dateFrom, dateTo, username) => {
         }
 
         let difference = ratingAfter - ratingBefore;
-        console.log(
-          "TimeClass: ",
-          item.time_class,
-          "Ratings: ",
-          ratingBefore,
-          ratingAfter,
-          difference
-        );
         item.userRatingChange = difference;
       }
     }
