@@ -2,12 +2,22 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Main from "../components/Main";
 import chessData from "../functions/chessData";
+import router from "next/router";
 
 const UserStats = ({ data }) => {
   return (
     <>
-      <Navbar />
-      <Main chessData={data} />
+      {data.code === 0 ? (
+        <>
+          <Navbar />
+          <h1>Username does not exist, try again</h1>
+        </>
+      ) : (
+        <>
+          <Navbar />
+          <Main chessData={data} />
+        </>
+      )}
     </>
   );
 };
@@ -26,7 +36,7 @@ export async function getServerSideProps({ params, query }) {
     let json = await response.json();
     data = await chessData(json, dateFrom, dateTo, username);
   } else {
-    console.log("Username does not exist, try again");
+    data = { error: "User name does not exist", code: 0 };
   }
 
   // Pass data to the page via props

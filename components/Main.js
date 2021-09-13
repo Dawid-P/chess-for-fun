@@ -1,15 +1,20 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DataDisplay from "./DataDisplay";
 
-const Main = ({ chessData }) => {
+const Main = ({ chessData = [] }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  let [numberOfDownloadedGames, setNNumberOfDownloadedGames] = useState(0);
+  useEffect(() => {
+    setNNumberOfDownloadedGames(chessData.length);
+  }, [chessData.length]);
 
   let [filteredChessData, setFilteredChessData] = useState(null);
 
@@ -55,6 +60,7 @@ const Main = ({ chessData }) => {
   return (
     <div className={styles.container}>
       <aside className={styles.aside}>
+        <h1>{numberOfDownloadedGames} games downloaded.</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h3>Openings by</h3>
           <input {...register("openings", {})} type="radio" value="code" />
