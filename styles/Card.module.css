@@ -1,0 +1,19 @@
+.cards {
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: solid 1px blue;
+  height: 150px;
+  width: 250px;
+}
+
+.positive {
+  background-color: greenyellow;
+}
+.negative {
+  background-color: red;
+}
