@@ -1,19 +1,33 @@
 .cards {
+  background-color: #0e3336;
   padding: 10px;
   display: flex;
-  gap: 5px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .card {
-  border: solid 1px blue;
-  height: 150px;
+  background-color: #26474a;
+  color: #fff;
+  padding: 15px;
+  border: solid 1px #ffff;
+  border-radius: 5%;
   width: 250px;
 }
 
 .positive {
-  background-color: greenyellow;
+  background-color: #26474a;
+  color: #fff;
+  padding: 15px;
+  border: solid 1px greenyellow;
+  border-radius: 5%;
+  width: 250px;
 }
 .negative {
-  background-color: red;
+  background-color: #26474a;
+  color: #fff;
+  padding: 15px;
+  border: solid 1px red;
+  border-radius: 5%;
+  width: 250px;
 }
