@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "../styles/Card.module.css";
 
-const Card = ({ data, name }) => {
-  let games = data[name];
+const Card = ({ data }) => {
+  let games = data.games;
+  let name = data.name;
   let ratingGain = 0;
   let ratingPerGame = 0;
 

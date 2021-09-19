@@ -50,6 +50,7 @@ const Main = ({ chessData = [] }) => {
           finalData.push(item);
       }
     }
+    finalData.unshift(formData.minGames);
 
     setFilteredChessData(finalData);
   };
@@ -62,11 +63,12 @@ const Main = ({ chessData = [] }) => {
       <aside className={styles.aside}>
         <h1>{numberOfDownloadedGames} games downloaded.</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h3>Openings by</h3>
-          <input {...register("openings", {})} type="radio" value="code" />
-          <label>Code</label>
-          <input {...register("openings", {})} type="radio" value="name" />
-          <label>Name</label>
+          <h3>Minimum number of games</h3>
+          <input
+            type="number"
+            placeholder="Enter number"
+            {...register("minGames", { required: true, min: 1 })}
+          />
 
           <h3>Color</h3>
           <input {...register("color", {})} type="radio" value="white" />
