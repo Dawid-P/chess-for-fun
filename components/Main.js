@@ -20,6 +20,7 @@ const Main = ({ chessData = [] }) => {
 
   const filterChessData = (chessData, formData) => {
     let finalData = [];
+    let finalDataObject = {};
     for (let item of chessData) {
       if (formData.color === "white" && item.userColor === "white") {
         item.time_class === "bullet" &&
@@ -52,7 +53,10 @@ const Main = ({ chessData = [] }) => {
     }
     finalData.unshift(formData.minGames);
 
-    setFilteredChessData(finalData);
+    finalDataObject.data = finalData;
+    finalDataObject.formData = formData;
+
+    setFilteredChessData(finalDataObject);
   };
 
   const onSubmit = (formData) => {
@@ -104,6 +108,18 @@ const Main = ({ chessData = [] }) => {
             {...register("daily", {})}
           />
           <label>Daily</label>
+
+          <h3>Sort by</h3>
+          <input {...register("sortBy", {})} type="radio" value="gamesNr" />
+          <label>Number of games</label>
+          <input {...register("sortBy", {})} type="radio" value="ratingGain" />
+          <label>Rating gain</label>
+          <input
+            {...register("sortBy", {})}
+            type="radio"
+            value="ratingPerGame"
+          />
+          <label>Rating per game</label>
 
           <input type="submit" />
         </form>

@@ -3,14 +3,14 @@
   padding: 0 0.5rem;
   display: grid;
   grid-template-columns: 3fr 9fr;
-  align-items: center;
+  align-items: top;
   height: 100vh;
 }
 
 .aside {
-  background-color: aqua;
+  background-color: #cdc8b1;
 }
 
 .main {
-  background-color: bisque;
+  background-color: #cdc8b1;
 }

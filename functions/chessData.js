@@ -33,7 +33,6 @@ const chessData = async (json, dateFrom, dateTo, username) => {
       item.opening = pgnView.headers[10].value;
       item.id = id;
       delete item.pgn;
-      delete item.fen;
       item.user = username.toLowerCase();
 
       if (item.white.username.toLowerCase() === username) {
