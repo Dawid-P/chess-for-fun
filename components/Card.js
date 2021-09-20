@@ -27,7 +27,10 @@ const Card = ({ data }) => {
       <p>{name}</p>
       <p>Games: {games.length}</p>
       <p>Rating gain: {ratingGain}</p>
-      <p>Rating per game: {ratingPerGame}</p>
+      <p>
+        {ratingPerGame > 0 ? `+${ratingPerGame}` : ratingPerGame} points per
+        game
+      </p>
       {/* <Chessboard
         id="BasicBoard"
         position={fen.fen}

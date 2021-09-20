@@ -69,57 +69,86 @@ const Main = ({ chessData = [] }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <p>Minimum number of games</p>
           <input
+            className={styles.minGames}
             type="number"
             placeholder="Enter number"
             {...register("minGames", { required: true, min: 1 })}
           />
 
           <p>Color</p>
-          <input {...register("color", {})} type="radio" value="white" />
-          <label>White</label>
-          <input {...register("color", {})} type="radio" value="black" />
-          <label>Black</label>
+          <label>
+            <input {...register("color", {})} type="radio" value="white" />
+            White
+          </label>
+          <label>
+            <input {...register("color", {})} type="radio" value="black" />
+            Black
+          </label>
 
           <p>Time class</p>
-          <input
-            type="checkbox"
-            placeholder="Bullet"
-            {...register("bullet", {})}
-          />
-          <label>Bullet</label>
+          <label>
+            <input
+              type="checkbox"
+              placeholder="Bullet"
+              {...register("bullet", {})}
+            />
+            Bullet
+          </label>
 
-          <input
-            type="checkbox"
-            placeholder="Blitz"
-            {...register("blitz", {})}
-          />
-          <label>Blitz</label>
+          <label>
+            <input
+              type="checkbox"
+              placeholder="Blitz"
+              {...register("blitz", {})}
+            />
+            Blitz
+          </label>
 
-          <input
-            type="checkbox"
-            placeholder="Rapid"
-            {...register("rapid", {})}
-          />
-          <label>Rapid</label>
+          <label>
+            <input
+              type="checkbox"
+              placeholder="Rapid"
+              {...register("rapid", {})}
+            />
+            Rapid
+          </label>
 
-          <input
-            type="checkbox"
-            placeholder="Daily"
-            {...register("daily", {})}
-          />
-          <label>Daily</label>
+          <label>
+            <input
+              type="checkbox"
+              placeholder="Daily"
+              {...register("daily", {})}
+            />
+            Daily
+          </label>
 
           <p>Sort by</p>
-          <input {...register("sortBy", {})} type="radio" value="gamesNr" />
-          <label>Number of games</label>
-          <input {...register("sortBy", {})} type="radio" value="ratingGain" />
-          <label>Rating gain</label>
-          <input
-            {...register("sortBy", {})}
-            type="radio"
-            value="ratingPerGame"
-          />
-          <label>Rating per game</label>
+          <div>
+            <label>
+              <input {...register("sortBy", {})} type="radio" value="gamesNr" />
+              Number of games
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                {...register("sortBy", {})}
+                type="radio"
+                value="ratingGain"
+              />
+              Rating gain
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                {...register("sortBy", {})}
+                type="radio"
+                value="ratingPerGame"
+              />
+              Rating per game
+            </label>
+          </div>
 
           <input className={styles.submit} value="Filter games" type="submit" />
         </form>
