@@ -13,7 +13,6 @@ const DataDisplay = ({ data }) => {
   if (data) {
     let minGames = data.formData.minGames;
     let sortBy = data.formData.sortBy;
-    console.log(sortBy);
 
     data.data.forEach((element) => {
       ratingDifference = ratingDifference + element.userRatingChange;
@@ -63,11 +62,13 @@ const DataDisplay = ({ data }) => {
       ecoArray.sort((a, b) => b.ratingPerGame - a.ratingPerGame);
     }
   }
-  console.log(ecoArray);
+
   return (
     <>
       {!data ? (
-        <h1>No games selected</h1>
+        <div className={styles.noGames}>
+          <h1>No games selected</h1>
+        </div>
       ) : (
         <div>
           <div className={styles.cards}>

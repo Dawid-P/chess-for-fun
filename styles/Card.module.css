@@ -6,6 +6,15 @@
   flex-wrap: wrap;
 }
 
+.noGames {
+  display: flex;
+  justify-content: center;
+}
+
+.noGames h1 {
+  padding: 50px;
+}
+
 .card {
   background-color: #26474a;
   color: #fff;
