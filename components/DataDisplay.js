@@ -6,13 +6,14 @@ import { useState, useEffect } from "react";
 const DataDisplay = ({ data }) => {
   let ratingDifference = null;
   let eco = [];
+  let opening = [];
   let gamesPerEco = {};
   let ecoArray = [];
 
   if (data) {
-    console.log(data.formData);
     let minGames = data.formData.minGames;
     let sortBy = data.formData.sortBy;
+    console.log(sortBy);
 
     data.data.forEach((element) => {
       ratingDifference = ratingDifference + element.userRatingChange;
@@ -21,28 +22,48 @@ const DataDisplay = ({ data }) => {
     // Create sets of all used ECOs
     eco = new Set(data.data.map((item) => item.ECO));
     eco = [...eco];
+    // Create sets of all used openings
+    opening = new Set(data.data.map((item) => item.opening));
+    opening = [...opening];
 
     // Create object with games per ECO
-    eco.forEach((item) => {
-      gamesPerEco[item] = data.data.filter((element) => element.ECO === item);
+    opening.forEach((item) => {
+      gamesPerEco[item] = data.data.filter(
+        (element) => element.opening === item
+      );
     });
 
-    eco.forEach((item) => {
+    opening.forEach((item) => {
       if (gamesPerEco[item].length < minGames) {
         delete gamesPerEco[item];
       }
     });
 
     for (let item in gamesPerEco) {
+      let ratingGain = 0;
+      gamesPerEco[item].forEach((element) => {
+        ratingGain = ratingGain + element.userRatingChange;
+      });
       ecoArray.push({
         name: item,
         games: gamesPerEco[item],
+        gamesNr: gamesPerEco[item].length,
+        ratingGain: ratingGain,
+        ratingPerGame: (ratingGain / gamesPerEco[item].length).toFixed(2),
       });
     }
 
-    ecoArray.sort((a, b) => b.games.length - a.games.length);
+    if (sortBy === "gamesNr") {
+      ecoArray.sort((a, b) => b.gamesNr - a.gamesNr);
+    }
+    if (sortBy === "ratingGain") {
+      ecoArray.sort((a, b) => b.ratingGain - a.ratingGain);
+    }
+    if (sortBy === "ratingPerGame") {
+      ecoArray.sort((a, b) => b.ratingPerGame - a.ratingPerGame);
+    }
   }
-
+  console.log(ecoArray);
   return (
     <>
       {!data ? (

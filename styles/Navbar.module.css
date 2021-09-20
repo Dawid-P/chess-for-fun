@@ -1,0 +1,24 @@
+.navbar {
+  border-bottom: 1px solid #185157;
+}
+.navbar form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar label {
+  padding: 20px;
+}
+
+.navbar h3 {
+  padding: 10px;
+}
+
+.navbar input {
+  height: 30px;
+}
+
+.submit {
+  margin-left: 10px;
+}

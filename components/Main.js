@@ -65,22 +65,22 @@ const Main = ({ chessData = [] }) => {
   return (
     <div className={styles.container}>
       <aside className={styles.aside}>
-        <h1>{numberOfDownloadedGames} games downloaded.</h1>
+        <h1>{0 || numberOfDownloadedGames} games downloaded</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h3>Minimum number of games</h3>
+          <p>Minimum number of games</p>
           <input
             type="number"
             placeholder="Enter number"
             {...register("minGames", { required: true, min: 1 })}
           />
 
-          <h3>Color</h3>
+          <p>Color</p>
           <input {...register("color", {})} type="radio" value="white" />
           <label>White</label>
           <input {...register("color", {})} type="radio" value="black" />
           <label>Black</label>
 
-          <h3>Time class</h3>
+          <p>Time class</p>
           <input
             type="checkbox"
             placeholder="Bullet"
@@ -109,7 +109,7 @@ const Main = ({ chessData = [] }) => {
           />
           <label>Daily</label>
 
-          <h3>Sort by</h3>
+          <p>Sort by</p>
           <input {...register("sortBy", {})} type="radio" value="gamesNr" />
           <label>Number of games</label>
           <input {...register("sortBy", {})} type="radio" value="ratingGain" />
@@ -121,7 +121,7 @@ const Main = ({ chessData = [] }) => {
           />
           <label>Rating per game</label>
 
-          <input type="submit" />
+          <input className={styles.submit} value="Filter games" type="submit" />
         </form>
       </aside>
       <main className={styles.main}>

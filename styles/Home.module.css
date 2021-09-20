@@ -8,9 +8,21 @@
 }
 
 .aside {
-  background-color: #cdc8b1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px;
 }
 
-.main {
-  background-color: #cdc8b1;
+.aside form {
+  border: 1px solid #185157;
+  border-radius: 10%;
+  padding: 10px;
+}
+
+.submit {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 50%;
 }

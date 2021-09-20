@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
+import styles from "../styles/Navbar.module.css";
 
 const Navbar = () => {
   const router = useRouter();
@@ -41,7 +42,7 @@ const Navbar = () => {
       {loading ? (
         <Loader />
       ) : (
-        <nav>
+        <nav className={styles.navbar}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label>Username</label>
             <input
@@ -49,7 +50,6 @@ const Navbar = () => {
               {...register("username", { required: true })}
             />
 
-            <h3>Date</h3>
             <label>From</label>
             <input
               defaultValue={userInForm ? fromInForm : undefined}
@@ -62,7 +62,11 @@ const Navbar = () => {
               type="month"
               {...register("dateTo", { required: true })}
             />
-            <input type="submit" />
+            <input
+              className={styles.submit}
+              value="Download games"
+              type="submit"
+            />
           </form>
         </nav>
       )}
