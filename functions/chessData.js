@@ -11,9 +11,58 @@ const chessData = async (json, dateFrom, dateTo, username) => {
   let dateFromIndex = data.indexOf(
     `https://api.chess.com/pub/player/${username}/games/${dateFrom}`
   );
+
   let dateToIndex = data.indexOf(
     `https://api.chess.com/pub/player/${username}/games/${dateTo}`
   );
+
+  if (dateFromIndex === -1) {
+    let ard = dateFrom.split("/");
+    let year = parseInt(ard[0]);
+    let month = parseInt(ard[1]);
+    while (dateFromIndex === -1) {
+      month = parseInt(month);
+      if (month < 12) {
+        month = month + 1;
+      } else {
+        month = 1;
+        year = year + 1;
+      }
+      if (month < 10) {
+        month = "0" + month.toString();
+      }
+      console.log("month: ", month);
+
+      dateFromIndex = data.indexOf(
+        `https://api.chess.com/pub/player/${username}/games/${year}/${month}`
+      );
+    }
+  }
+
+  if (dateToIndex === -1) {
+    let ard = dateFrom.split("/");
+    let year = parseInt(ard[0]);
+    let month = parseInt(ard[1]);
+    while (dateToIndex === -1) {
+      month = parseInt(month);
+      if (month < 12) {
+        month = month + 1;
+      } else {
+        month = 1;
+        year = year + 1;
+      }
+      if (month < 10) {
+        month = "0" + month.toString();
+      }
+
+      dateToIndex = data.indexOf(
+        `https://api.chess.com/pub/player/${username}/games/${year}/${month}`
+      );
+    }
+  }
+
+  console.log("Date from Index: ", dateFromIndex);
+  console.log("Date to Index: ", dateToIndex);
   let slicedData = data.slice(dateFromIndex, dateToIndex + 1);
 
   // Extract all games for months selected by user
@@ -39,11 +88,15 @@ const chessData = async (json, dateFrom, dateTo, username) => {
         item.userColor = "white";
         item.userResult = item.white.result;
         item.userRating = item.white.rating;
+        item.opponent = item.black;
+        item.result = item.white.result;
       }
       if (item.black.username.toLowerCase() === username) {
         item.userColor = "black";
         item.userResult = item.black.result;
         item.userRating = item.black.rating;
+        item.opponent = item.white;
+        item.result = item.black.result;
       }
       delete item.black;
       delete item.white;

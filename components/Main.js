@@ -51,7 +51,6 @@ const Main = ({ chessData = [] }) => {
           finalData.push(item);
       }
     }
-    finalData.unshift(formData.minGames);
 
     finalDataObject.data = finalData;
     finalDataObject.formData = formData;
