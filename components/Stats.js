@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/Stats.module.css";
 import { useState, useEffect } from "react";
 
-const LastGames = ({ data }) => {
+const Stats = ({ data }) => {
   let lastGames = [...data];
   let bestWins = [...data].filter((item) => item.result === "win");
   let worstLoses = [...data].filter((item) => item.result !== "win");
@@ -67,4 +67,4 @@ const LastGames = ({ data }) => {
   );
 };
 
-export default LastGames;
+export default Stats;

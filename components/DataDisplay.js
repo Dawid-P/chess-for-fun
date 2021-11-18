@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import styles from "../styles/Card.module.css";
 import { useState, useEffect } from "react";
-import LastGames from "./Stats";
+import Stats from "./Stats";
 
 const DataDisplay = ({ data }) => {
   let ratingDifference = null;
@@ -73,7 +73,7 @@ const DataDisplay = ({ data }) => {
       ) : (
         <div>
           <div>
-            <LastGames data={data.data} />
+            <Stats data={data.data} />
           </div>
           <div className={styles.cards}>
             {ecoArray.map((item) => (
