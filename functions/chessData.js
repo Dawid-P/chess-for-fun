@@ -61,8 +61,6 @@ const chessData = async (json, dateFrom, dateTo, username) => {
     }
   }
 
-  console.log("Date from Index: ", dateFromIndex);
-  console.log("Date to Index: ", dateToIndex);
   let slicedData = data.slice(dateFromIndex, dateToIndex + 1);
 
   // Extract all games for months selected by user
@@ -74,6 +72,12 @@ const chessData = async (json, dateFrom, dateTo, username) => {
       allGames.push(...games.games);
     }
   }
+
+  const matchDate = (ts)=> {
+    // ts = timestamp of endmatch from api
+    // returns date obj
+    return new Date(ts*1000);
+}
   // Structure data for frontend
   async function structureChessData(allGames) {
     for (let item of allGames) {
@@ -83,6 +87,7 @@ const chessData = async (json, dateFrom, dateTo, username) => {
       item.id = id;
       delete item.pgn;
       item.user = username.toLowerCase();
+      item.matchDate = matchDate(item.end_time)
 
       if (item.white.username.toLowerCase() === username) {
         item.userColor = "white";

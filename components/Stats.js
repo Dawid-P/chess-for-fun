@@ -47,7 +47,7 @@ const Stats = ({ data }) => {
         <ul>
           {bestWins.map((item) => (
             <li key={item.end_time}>
-              {item.opponent.username} ({item.opponent.rating})
+              {item.end_time} - {item.opponent.username} ({item.opponent.rating})
             </li>
           ))}
         </ul>
@@ -58,7 +58,7 @@ const Stats = ({ data }) => {
         <ul>
           {worstLoses.map((item) => (
             <li key={item.end_time}>
-              {item.opponent.username} ({item.opponent.rating})
+              {item.end_time} - {item.opponent.username} ({item.opponent.rating})
             </li>
           ))}
         </ul>
