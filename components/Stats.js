@@ -9,9 +9,9 @@ const LastGames = ({ data }) => {
 
   lastGames.sort((a, b) => b.end_time - a.end_time).splice(5);
 
-  bestWins.sort((a, b) => b.opponent.rating - a.opponent.rating).splice(10);
+  bestWins.sort((a, b) => b.opponent.rating - a.opponent.rating).splice(15);
 
-  worstLoses.sort((a, b) => a.opponent.rating - b.opponent.rating).splice(10);
+  worstLoses.sort((a, b) => a.opponent.rating - b.opponent.rating).splice(15);
 
   console.log(bestWins);
   return (
