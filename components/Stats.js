@@ -17,8 +17,8 @@ const LastGames = ({ data }) => {
     return average(ratings)
   }
 
-  let winsRatings = averageRatings(bestWins);
-  let losesRatings = averageRatings(worstLoses);
+  let winsRatings = averageRatings(bestWins).toFixed();
+  let losesRatings = averageRatings(worstLoses).toFixed();
   
 
   lastGames.sort((a, b) => b.end_time - a.end_time).splice(5);
@@ -43,7 +43,7 @@ const LastGames = ({ data }) => {
       </div>
       <div className={styles.card}>
         <h2>Best wins</h2>
-        <h3>Average ratings: {winsRatings}</h3>
+        <h3>Average: {winsRatings}</h3>
         <ul>
           {bestWins.map((item) => (
             <li key={item.end_time}>
@@ -54,7 +54,7 @@ const LastGames = ({ data }) => {
       </div>
       <div className={styles.card}>
         <h2>Worst loses</h2>
-        <h3>Average ratings: {losesRatings}</h3>
+        <h3>Average: {losesRatings}</h3>
         <ul>
           {worstLoses.map((item) => (
             <li key={item.end_time}>
