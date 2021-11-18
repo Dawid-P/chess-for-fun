@@ -7,13 +7,27 @@ const LastGames = ({ data }) => {
   let bestWins = [...data].filter((item) => item.result === "win");
   let worstLoses = [...data].filter((item) => item.result !== "win");
 
+  const averageRatings = games => {
+    const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
+    let ratings = []
+    games.forEach(item => {
+      ratings.push(item.opponent.rating)
+    });
+    console.log(average(ratings))
+    return average(ratings)
+  }
+
+  let winsRatings = averageRatings(bestWins);
+  let losesRatings = averageRatings(worstLoses);
+  
+
   lastGames.sort((a, b) => b.end_time - a.end_time).splice(5);
 
   bestWins.sort((a, b) => b.opponent.rating - a.opponent.rating).splice(15);
 
   worstLoses.sort((a, b) => a.opponent.rating - b.opponent.rating).splice(15);
 
-  console.log(bestWins);
+  
   return (
     <div className={styles.stats}>
       <div className={styles.card}>
@@ -29,6 +43,7 @@ const LastGames = ({ data }) => {
       </div>
       <div className={styles.card}>
         <h2>Best wins</h2>
+        <h3>Average ratings: {winsRatings}</h3>
         <ul>
           {bestWins.map((item) => (
             <li key={item.end_time}>
@@ -39,6 +54,7 @@ const LastGames = ({ data }) => {
       </div>
       <div className={styles.card}>
         <h2>Worst loses</h2>
+        <h3>Average ratings: {losesRatings}</h3>
         <ul>
           {worstLoses.map((item) => (
             <li key={item.end_time}>
