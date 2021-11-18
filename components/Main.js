@@ -72,11 +72,17 @@ const Main = ({ chessData = [] }) => {
             type="number"
             placeholder="Enter number"
             {...register("minGames", { required: true, min: 1 })}
+            defaultValue={1}
           />
 
           <p>Color</p>
           <label>
-            <input {...register("color", {})} type="radio" value="white" />
+            <input
+              {...register("color", {})}
+              type="radio"
+              value="white"
+              defaultChecked
+            />
             White
           </label>
           <label>
@@ -99,6 +105,7 @@ const Main = ({ chessData = [] }) => {
               type="checkbox"
               placeholder="Blitz"
               {...register("blitz", {})}
+              defaultChecked
             />
             Blitz
           </label>
@@ -124,7 +131,12 @@ const Main = ({ chessData = [] }) => {
           <p>Sort by</p>
           <div>
             <label>
-              <input {...register("sortBy", {})} type="radio" value="gamesNr" />
+              <input
+                {...register("sortBy", {})}
+                type="radio"
+                value="gamesNr"
+                defaultChecked
+              />
               Number of games
             </label>
           </div>

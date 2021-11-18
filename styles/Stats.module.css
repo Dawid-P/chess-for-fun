@@ -1,0 +1,19 @@
+.stats {
+  background-color: #0e3336;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  gap: 10px;
+}
+
+.card {
+  background-color: #26474a;
+  color: #fff;
+  padding: 15px;
+  border: solid 1px #ffff;
+  border-radius: 5%;
+}
+.card ul {
+  list-style-type: none;
+}

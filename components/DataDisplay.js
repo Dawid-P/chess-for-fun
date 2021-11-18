@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import styles from "../styles/Card.module.css";
 import { useState, useEffect } from "react";
-import LastGames from "./LastGames";
+import LastGames from "./Stats";
 
 const DataDisplay = ({ data }) => {
   let ratingDifference = null;
