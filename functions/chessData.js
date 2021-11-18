@@ -76,7 +76,8 @@ const chessData = async (json, dateFrom, dateTo, username) => {
   const matchDate = (ts)=> {
     // ts = timestamp of endmatch from api
     // returns date obj
-    return new Date(ts*1000);
+    let result = new Date(ts*1000).toISOString().slice(0,10)
+    return result
 }
   // Structure data for frontend
   async function structureChessData(allGames) {
