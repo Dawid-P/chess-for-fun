@@ -40,6 +40,10 @@ const Stats = ({ data }) => {
             </li>
           ))}
         </ul>
+        <h3>Overall stats</h3>
+        <div>
+
+        </div>
       </div>
       <div className={styles.card}>
         <h2>Best wins</h2>
@@ -47,7 +51,7 @@ const Stats = ({ data }) => {
         <ul>
           {bestWins.map((item) => (
             <li key={item.end_time}>
-              {item.matchDate} - {item.opponent.username} ({item.opponent.rating})
+              {item.matchDate} - {item.opponent.username} ({item.opponent.rating}) <a href={item.url} rel="noopener noreferrer" target="_blank">Link</a>
             </li>
           ))}
         </ul>
@@ -58,7 +62,7 @@ const Stats = ({ data }) => {
         <ul>
           {worstLoses.map((item) => (
             <li key={item.end_time}>
-              {item.matchDate} - {item.opponent.username} ({item.opponent.rating})
+              {item.matchDate} - {item.opponent.username} ({item.opponent.rating}) <a href={item.url} rel="noopener noreferrer" target="_blank">Link</a>
             </li>
           ))}
         </ul>
