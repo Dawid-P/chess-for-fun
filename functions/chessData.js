@@ -70,8 +70,7 @@ const chessData = async (json, dateFrom, dateTo, username) => {
     for (let item of slicedData) {
       games = await fetcher(item);
       allGames.push(...games.games)
-      await structureChessData(allGames);
-      await addRatingChange(allGames);
+     
     }
   }
 
@@ -147,7 +146,8 @@ const chessData = async (json, dateFrom, dateTo, username) => {
   }
 
   await sequentialCall(slicedData);
-  
+  await structureChessData(allGames);
+  await addRatingChange(allGames);
 
   return allGames;
 };
