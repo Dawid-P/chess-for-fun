@@ -20,8 +20,23 @@ const Main = ({ chessData = [] }) => {
 
   const filterChessData = (chessData, formData) => {
     let finalData = [];
+    let blackAndWhite = [];
     let finalDataObject = {};
     for (let item of chessData) {
+      if (1 === 1) {
+        item.time_class === "bullet" &&
+          formData.bullet === true &&
+          blackAndWhite.push(item);
+        item.time_class === "blitz" &&
+          formData.blitz === true &&
+          blackAndWhite.push(item);
+        item.time_class === "rapid" &&
+          formData.rapid === true &&
+          blackAndWhite.push(item);
+        item.time_class === "daily" &&
+          formData.daily === true &&
+          blackAndWhite.push(item);
+      }
       if (formData.color === "white" && item.userColor === "white") {
         item.time_class === "bullet" &&
           formData.bullet === true &&
@@ -54,6 +69,7 @@ const Main = ({ chessData = [] }) => {
 
     finalDataObject.data = finalData;
     finalDataObject.formData = formData;
+    finalDataObject.blackandwhite = blackAndWhite;
 
     setFilteredChessData(finalDataObject);
   };

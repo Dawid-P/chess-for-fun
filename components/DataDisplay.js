@@ -73,7 +73,7 @@ const DataDisplay = ({ data }) => {
       ) : (
         <div>
           <div>
-            <Stats data={data.data} />
+            <Stats data={data} />
           </div>
           <div className={styles.cards}>
             {ecoArray.map((item) => (
