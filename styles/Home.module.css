@@ -2,7 +2,7 @@
   min-height: 100vh;
   padding: 0 0.5rem;
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: 2fr 10fr;
   align-items: top;
   height: 100vh;
 }
@@ -16,7 +16,7 @@
 
 .aside form {
   border: 1px solid #185157;
-  border-radius: 10%;
+  border-radius: 5%;
   padding: 15px 25px 15px 25px;
   width: 100%;
 }

@@ -3,10 +3,15 @@ import Navbar from "../components/Navbar";
 import Main from "../components/Main";
 import chessData from "../functions/chessData";
 import router from "next/router";
+import Head from "next/head";
 
 const UserStats = ({ data }) => {
   return (
     <>
+      <Head>
+        <title>{data[0].user} stats</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       {data.code === 0 ? (
         <>
           <Navbar />
