@@ -69,6 +69,7 @@ const chessData = async (json, dateFrom, dateTo, username) => {
   async function sequentialCall(slicedData) {
     for (let item of slicedData) {
       games = await fetcher(item);
+      console.log('Item added...')
       allGames.push(...games.games);
     }
   }
