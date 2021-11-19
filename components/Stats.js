@@ -137,12 +137,17 @@ const overallStatsCalc = (matches) => {
       item.result === "insufficient" ||
       item.result === "50move" ||
       item.result === "repetition" ||
-      item.result === "agreed"
+      item.result === "agreed" ||
+      item.result === "timevsinsufficient"
     ) {
       draws++;
       if (item.result === "stalemate") drawBy.stalemate++;
       if (item.result === "agreed") drawBy.agreed++;
-      if (item.result === "insufficient") drawBy.insufficient++;
+      if (
+        item.result === "insufficient" ||
+        item.result === "timevsinsufficient"
+      )
+        drawBy.insufficient++;
       if (item.result === "repetition" || item.result === "50move")
         drawBy.repetition++;
     }
