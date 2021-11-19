@@ -20,45 +20,49 @@ const Stats = ({ data }) => {
   lastGames.sort((a, b) => b.end_time - a.end_time).splice(5);
   bestWins.sort((a, b) => b.opponent.rating - a.opponent.rating).splice(15);
   worstLoses.sort((a, b) => a.opponent.rating - b.opponent.rating).splice(15);
+  console.log(worstLoses);
 
   return (
     <div className={styles.stats}>
       <div className={styles.card}>
-        <h2>Latest matches</h2>
-        <ul>
-          {lastGames.map((item) => (
-            <li key={item.end_time}>
-              {item.result} ({item.userRating}) vs {item.opponent.username} (
-              {item.opponent.rating}) | Rating: {item.userRatingChange}
-            </li>
-          ))}
-        </ul>
-        <h3>Overall stats</h3>
-        <h5>
+        <h2>Overall stats</h2>
+        <h3>
           Wins: {overallStats.wins} Draws: {overallStats.draws} Loses:{" "}
           {overallStats.loses}
-        </h5>
-        <div>Win by:</div>
+        </h3>
+        <p>
+          Average win: {winsRatings} Average lose: {losesRatings}
+        </p>
+        <div className={styles.by}>Win by:</div>
         <p>
           Checkmate: {overallStats.winBy.mate} Resign:{" "}
           {overallStats.winBy.resign} Time: {overallStats.winBy.time}
         </p>
-        <div>Draw by:</div>
+        <div className={styles.by}>Draw by:</div>
         <p>
           Repetition: {overallStats.drawBy.repetition} Stalemate:{" "}
           {overallStats.drawBy.stalemate} Insufficient material:{" "}
           {overallStats.drawBy.insufficient} Agreed:{" "}
           {overallStats.drawBy.agreed}
         </p>
-        <div>Lose by:</div>
+        <div className={styles.by}>Lose by:</div>
         <p>
           Checkmate: {overallStats.loseBy.mate} Resign:{" "}
           {overallStats.loseBy.resign} Time: {overallStats.loseBy.time}
         </p>
+        <h2>Latest matches</h2>
+        <ul>
+          {lastGames.map((item) => (
+            <li key={item.end_time}>
+              {item.result} ({item.userRating}) vs {item.opponent.username} (
+              {item.opponent.rating})
+            </li>
+          ))}
+        </ul>
       </div>
       <div className={styles.card}>
         <h2>Best wins</h2>
-        <h3>Average: {winsRatings}</h3>
+
         <ul>
           {bestWins.map((item) => (
             <li key={item.end_time}>
@@ -72,7 +76,7 @@ const Stats = ({ data }) => {
       </div>
       <div className={styles.card}>
         <h2>Worst loses</h2>
-        <h3>Average: {losesRatings}</h3>
+
         <ul>
           {worstLoses.map((item) => (
             <li key={item.end_time}>

@@ -12,8 +12,16 @@
   color: #fff;
   padding: 15px;
   border: solid 1px #ffff;
-  border-radius: 5%;
+  border-radius: 2%;
 }
 .card ul {
   list-style-type: none;
+}
+
+.card ul li {
+  padding: 5px 0;
+}
+
+.by {
+  font-weight: bolder;
 }
