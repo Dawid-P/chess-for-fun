@@ -2,10 +2,7 @@ import React from "react";
 import styles from "../styles/Stats.module.css";
 
 const Stats = ({ data }) => {
-  console.log(data);
-
   const overallStats = overallStatsCalc(data.blackandwhite);
-  console.log(overallStats);
 
   // Set data in latest matches, best wins and worst loses
   let lastGames = [...data.blackandwhite];
@@ -20,7 +17,6 @@ const Stats = ({ data }) => {
   lastGames.sort((a, b) => b.end_time - a.end_time).splice(5);
   bestWins.sort((a, b) => b.opponent.rating - a.opponent.rating).splice(15);
   worstLoses.sort((a, b) => a.opponent.rating - b.opponent.rating).splice(15);
-  console.log(worstLoses);
 
   return (
     <div className={styles.stats}>
