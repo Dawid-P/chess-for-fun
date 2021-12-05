@@ -1,8 +1,29 @@
 import React from "react";
 import styles from "../styles/Stats.module.css";
+import { MyResponsivePie } from "./charts/Pie";
 
 const Stats = ({ data }) => {
   const overallStats = overallStatsCalc(data.blackandwhite);
+  let pieData = [
+    {
+      id: "wins",
+      label: "wins",
+      value: overallStats.wins,
+      color: "hsl(113, 70%, 50%)",
+    },
+    {
+      id: "draws",
+      label: "draws",
+      value: overallStats.draws,
+      color: "hsl(330, 70%, 50%)",
+    },
+    {
+      id: "loses",
+      label: "loses",
+      value: overallStats.loses,
+      color: "hsl(291, 70%, 50%)",
+    },
+  ];
 
   // Set data in latest matches, best wins and worst loses
   let lastGames = [...data.blackandwhite];
@@ -22,10 +43,13 @@ const Stats = ({ data }) => {
     <div className={styles.stats}>
       <div className={styles.card}>
         <h2>Overall stats</h2>
-        <h3>
+        <div className={styles.pie}>
+          <MyResponsivePie data={pieData} />
+        </div>
+        {/* <h3>
           Wins: {overallStats.wins} Draws: {overallStats.draws} Loses:{" "}
           {overallStats.loses}
-        </h3>
+        </h3> */}
         <p>
           Average win: {winsRatings} Average lose: {losesRatings}
         </p>
