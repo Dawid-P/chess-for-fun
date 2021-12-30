@@ -62,11 +62,9 @@ const Navbar = () => {
               type="month"
               {...register("dateTo", { required: true })}
             />
-            <input
-              className={styles.submit}
-              value="Download games"
-              type="submit"
-            />
+            <button className={styles.submit} type="submit">
+              Download games
+            </button>
           </form>
         </nav>
       )}

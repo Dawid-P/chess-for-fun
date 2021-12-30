@@ -103,7 +103,7 @@ const Stats = ({ data }) => {
   );
   let winsRatings = averageRatings(bestWins).toFixed();
   let losesRatings = averageRatings(worstLoses).toFixed();
-  lastGames.sort((a, b) => b.end_time - a.end_time).splice(5);
+  lastGames.sort((a, b) => b.end_time - a.end_time).splice(15);
   bestWins.sort((a, b) => b.opponent.rating - a.opponent.rating).splice(15);
   worstLoses.sort((a, b) => a.opponent.rating - b.opponent.rating).splice(15);
 

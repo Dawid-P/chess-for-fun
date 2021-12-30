@@ -4,6 +4,9 @@ import Main from "../components/Main";
 import chessData from "../functions/chessData";
 import router from "next/router";
 import Head from "next/head";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChess } from "@fortawesome/free-solid-svg-icons";
 const pgnParser = require("pgn-parser");
 
 const UserStats = ({ data, username }) => {
@@ -126,7 +129,10 @@ const UserStats = ({ data, username }) => {
         <>
           <Navbar />
           {finalData.length === 0 ? (
-            <h2>Loading</h2>
+            <div className="loader">
+              <h3>Loading Games</h3>
+              <FontAwesomeIcon icon={faChess} size="10x" />
+            </div>
           ) : (
             <Main chessData={finalData} />
           )}

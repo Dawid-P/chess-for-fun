@@ -177,7 +177,9 @@ const Main = ({ chessData = [] }) => {
             </label>
           </div>
 
-          <input className={styles.submit} value="Filter games" type="submit" />
+          <button className={styles.submit} type="submit">
+            Filter games
+          </button>
         </form>
       </aside>
       <main className={styles.main}>
