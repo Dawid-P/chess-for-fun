@@ -2,7 +2,7 @@
   background-color: #0e3336;
   padding: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
 
   gap: 10px;
 }
@@ -22,9 +22,19 @@
   padding: 5px 0;
 }
 
-.by {
-  font-weight: bolder;
-}
 .pie {
-  height: 300px;
+  font-weight: bolder;
+  height: 250px;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.charts h4 {
+  margin-bottom: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

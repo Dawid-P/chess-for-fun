@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/Stats.module.css";
 import { MyResponsivePie } from "./charts/Pie";
 
 const Stats = ({ data }) => {
+  console.log(data.blackandwhite);
+  const [bestDisplay, setBestDisplay] = useState("wins");
   const overallStats = overallStatsCalc(data.blackandwhite);
-  let pieData = [
+  let pieOverall = [
     {
       id: "wins",
       label: "wins",
@@ -21,6 +23,72 @@ const Stats = ({ data }) => {
       id: "loses",
       label: "loses",
       value: overallStats.loses,
+      color: "hsl(291, 70%, 50%)",
+    },
+  ];
+  let pieWinBy = [
+    {
+      id: "checkmate",
+      label: "checkmate",
+      value: overallStats.winBy.mate,
+      color: "hsl(113, 70%, 50%)",
+    },
+    {
+      id: "resign",
+      label: "resign",
+      value: overallStats.winBy.resign,
+      color: "hsl(330, 70%, 50%)",
+    },
+    {
+      id: "time",
+      label: "time",
+      value: overallStats.winBy.time,
+      color: "hsl(291, 70%, 50%)",
+    },
+  ];
+  let pieLoseBy = [
+    {
+      id: "checkmate",
+      label: "checkmate",
+      value: overallStats.loseBy.mate,
+      color: "hsl(113, 70%, 50%)",
+    },
+    {
+      id: "resign",
+      label: "resign",
+      value: overallStats.loseBy.resign,
+      color: "hsl(330, 70%, 50%)",
+    },
+    {
+      id: "time",
+      label: "time",
+      value: overallStats.loseBy.time,
+      color: "hsl(291, 70%, 50%)",
+    },
+  ];
+  let pieDrawBy = [
+    {
+      id: "repetition",
+      label: "repetition",
+      value: overallStats.drawBy.repetition,
+      color: "hsl(113, 70%, 50%)",
+    },
+    {
+      id: "stalemate",
+      label: "stalemate",
+      value: overallStats.drawBy.stalemate,
+      color: "hsl(330, 70%, 50%)",
+    },
+    {
+      id: "insufficient",
+      label: "insufficient",
+      value: overallStats.drawBy.insufficient,
+      color: "hsl(291, 70%, 50%)",
+    },
+    {
+      id: "agreed",
+      label: "agreed",
+      value: overallStats.drawBy.agreed,
       color: "hsl(291, 70%, 50%)",
     },
   ];
@@ -42,71 +110,77 @@ const Stats = ({ data }) => {
   return (
     <div className={styles.stats}>
       <div className={styles.card}>
-        <h2>Overall stats</h2>
-        <div className={styles.pie}>
-          <MyResponsivePie data={pieData} />
-        </div>
-        {/* <h3>
+        <div className={styles.charts}>
+          <div className={styles.pie}>
+            <h4>Overall</h4>
+            <MyResponsivePie data={pieOverall} />
+          </div>
+          {/* <h4>
           Wins: {overallStats.wins} Draws: {overallStats.draws} Loses:{" "}
           {overallStats.loses}
-        </h3> */}
-        <p>
+        </h4> */}
+          {/* <p>
           Average win: {winsRatings} Average lose: {losesRatings}
-        </p>
-        <div className={styles.by}>Win by:</div>
-        <p>
-          Checkmate: {overallStats.winBy.mate} Resign:{" "}
-          {overallStats.winBy.resign} Time: {overallStats.winBy.time}
-        </p>
-        <div className={styles.by}>Draw by:</div>
-        <p>
-          Repetition: {overallStats.drawBy.repetition} Stalemate:{" "}
-          {overallStats.drawBy.stalemate} Insufficient material:{" "}
-          {overallStats.drawBy.insufficient} Agreed:{" "}
-          {overallStats.drawBy.agreed}
-        </p>
-        <div className={styles.by}>Lose by:</div>
-        <p>
-          Checkmate: {overallStats.loseBy.mate} Resign:{" "}
-          {overallStats.loseBy.resign} Time: {overallStats.loseBy.time}
-        </p>
-        <h2>Latest matches</h2>
-        <ul>
-          {lastGames.map((item) => (
-            <li key={item.end_time}>
-              {item.result} ({item.userRating}) vs {item.opponent.username} (
-              {item.opponent.rating})
-            </li>
-          ))}
-        </ul>
+        </p> */}
+
+          <div className={styles.pie}>
+            <h4>Wins</h4>
+            <MyResponsivePie data={pieWinBy} />
+          </div>
+          <div className={styles.pie}>
+            <h4>Draws</h4>
+            <MyResponsivePie data={pieDrawBy} />
+          </div>
+          <div className={styles.pie}>
+            <h4>Loses</h4>
+            <MyResponsivePie data={pieLoseBy} />
+          </div>
+        </div>
       </div>
       <div className={styles.card}>
-        <h2>Best wins</h2>
-
-        <ul>
-          {bestWins.map((item) => (
-            <li key={item.end_time}>
-              <a href={item.url} rel="noopener noreferrer" target="_blank">
-                {item.matchDate} - {item.opponent.username} (
-                {item.opponent.rating}){" "}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={styles.card}>
-        <h2>Worst loses</h2>
-
-        <ul>
-          {worstLoses.map((item) => (
-            <li key={item.end_time}>
-              <a href={item.url} rel="noopener noreferrer" target="_blank">
-                {item.matchDate} - {item.opponent.username} (
-                {item.opponent.rating}){" "}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <button className="button" onClick={(e) => setBestDisplay("wins")}>
+          Best wins
+        </button>
+        <button className="button" onClick={(e) => setBestDisplay("loses")}>
+          Worst loses
+        </button>
+        <button className="button" onClick={(e) => setBestDisplay("latest")}>
+          Latest matches
+        </button>
+        {bestDisplay === "wins" && (
+          <ul>
+            {bestWins.map((item) => (
+              <li key={item.end_time}>
+                <a href={item.url} rel="noopener noreferrer" target="_blank">
+                  {item.matchDate} - {item.opponent.username} (
+                  {item.opponent.rating}){" "}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {bestDisplay === "loses" && (
+          <ul>
+            {worstLoses.map((item) => (
+              <li key={item.end_time}>
+                <a href={item.url} rel="noopener noreferrer" target="_blank">
+                  {item.matchDate} - {item.opponent.username} (
+                  {item.opponent.rating}){" "}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {bestDisplay === "latest" && (
+          <ul>
+            {lastGames.map((item) => (
+              <li key={item.end_time}>
+                {item.result} ({item.userRating}) vs {item.opponent.username} (
+                {item.opponent.rating})
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
