@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "../styles/Loader.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChess } from "@fortawesome/free-solid-svg-icons";
 
 const Loader = () => {
   return (
     <div className={styles.loader}>
-      <h1>Loading data....</h1>
-      <img src="../spinner.svg" />
+      <h3>Loading Games</h3>
+      <FontAwesomeIcon icon={faChess} size="2x" />
     </div>
   );
 };
