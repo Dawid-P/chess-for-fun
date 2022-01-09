@@ -10,19 +10,19 @@ const Stats = ({ data }) => {
           id: "wins",
           label: "wins",
           value: colorStats.wins,
-          color: "hsl(113, 70%, 50%)",
+          color: "hsl(108, 100%, 50%)",
         },
         {
           id: "draws",
           label: "draws",
           value: colorStats.draws,
-          color: "hsl(330, 70%, 50%)",
+          color: "hsl(178, 100%, 50%)",
         },
         {
           id: "loses",
           label: "loses",
           value: colorStats.loses,
-          color: "hsl(291, 70%, 50%)",
+          color: "hsl(345, 100%, 34%)",
         },
       ],
       wins: [
