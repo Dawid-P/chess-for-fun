@@ -3,97 +3,113 @@ import styles from "../styles/Stats.module.css";
 import { MyResponsivePie } from "./charts/Pie";
 
 const Stats = ({ data }) => {
-  console.log(data.blackandwhite);
+  function chartProduction(colorStats) {
+    return {
+      overall: [
+        {
+          id: "wins",
+          label: "wins",
+          value: colorStats.wins,
+          color: "hsl(113, 70%, 50%)",
+        },
+        {
+          id: "draws",
+          label: "draws",
+          value: colorStats.draws,
+          color: "hsl(330, 70%, 50%)",
+        },
+        {
+          id: "loses",
+          label: "loses",
+          value: colorStats.loses,
+          color: "hsl(291, 70%, 50%)",
+        },
+      ],
+      wins: [
+        {
+          id: "checkmate",
+          label: "checkmate",
+          value: colorStats.winBy.mate,
+          color: "hsl(113, 70%, 50%)",
+        },
+        {
+          id: "resign",
+          label: "resign",
+          value: colorStats.winBy.resign,
+          color: "hsl(330, 70%, 50%)",
+        },
+        {
+          id: "time",
+          label: "time",
+          value: colorStats.winBy.time,
+          color: "hsl(291, 70%, 50%)",
+        },
+      ],
+      loses: [
+        {
+          id: "checkmate",
+          label: "checkmate",
+          value: colorStats.loseBy.mate,
+          color: "hsl(113, 70%, 50%)",
+        },
+        {
+          id: "resign",
+          label: "resign",
+          value: colorStats.loseBy.resign,
+          color: "hsl(330, 70%, 50%)",
+        },
+        {
+          id: "time",
+          label: "time",
+          value: colorStats.loseBy.time,
+          color: "hsl(291, 70%, 50%)",
+        },
+      ],
+      draws: [
+        {
+          id: "repetition",
+          label: "repetition",
+          value: colorStats.drawBy.repetition,
+          color: "hsl(113, 70%, 50%)",
+        },
+        {
+          id: "stalemate",
+          label: "stalemate",
+          value: colorStats.drawBy.stalemate,
+          color: "hsl(330, 70%, 50%)",
+        },
+        {
+          id: "insufficient",
+          label: "insufficient",
+          value: colorStats.drawBy.insufficient,
+          color: "hsl(291, 70%, 50%)",
+        },
+        {
+          id: "agreed",
+          label: "agreed",
+          value: colorStats.drawBy.agreed,
+          color: "hsl(291, 70%, 50%)",
+        },
+      ],
+    };
+  }
+
+  const blackAndWhite = data.blackandwhite;
+  const white = data.blackandwhite.filter((item) => item.userColor === "white");
+  const black = data.blackandwhite.filter((item) => item.userColor === "black");
+  const overallStats = overallStatsCalc(blackAndWhite);
+  const blackStats = overallStatsCalc(black);
+  const whiteStats = overallStatsCalc(white);
+
+  const allChartData = chartProduction(overallStats);
+  const blackChartData = chartProduction(blackStats);
+  const whiteChartData = chartProduction(whiteStats);
+
   const [bestDisplay, setBestDisplay] = useState("wins");
-  const overallStats = overallStatsCalc(data.blackandwhite);
-  let pieOverall = [
-    {
-      id: "wins",
-      label: "wins",
-      value: overallStats.wins,
-      color: "hsl(113, 70%, 50%)",
-    },
-    {
-      id: "draws",
-      label: "draws",
-      value: overallStats.draws,
-      color: "hsl(330, 70%, 50%)",
-    },
-    {
-      id: "loses",
-      label: "loses",
-      value: overallStats.loses,
-      color: "hsl(291, 70%, 50%)",
-    },
-  ];
-  let pieWinBy = [
-    {
-      id: "checkmate",
-      label: "checkmate",
-      value: overallStats.winBy.mate,
-      color: "hsl(113, 70%, 50%)",
-    },
-    {
-      id: "resign",
-      label: "resign",
-      value: overallStats.winBy.resign,
-      color: "hsl(330, 70%, 50%)",
-    },
-    {
-      id: "time",
-      label: "time",
-      value: overallStats.winBy.time,
-      color: "hsl(291, 70%, 50%)",
-    },
-  ];
-  let pieLoseBy = [
-    {
-      id: "checkmate",
-      label: "checkmate",
-      value: overallStats.loseBy.mate,
-      color: "hsl(113, 70%, 50%)",
-    },
-    {
-      id: "resign",
-      label: "resign",
-      value: overallStats.loseBy.resign,
-      color: "hsl(330, 70%, 50%)",
-    },
-    {
-      id: "time",
-      label: "time",
-      value: overallStats.loseBy.time,
-      color: "hsl(291, 70%, 50%)",
-    },
-  ];
-  let pieDrawBy = [
-    {
-      id: "repetition",
-      label: "repetition",
-      value: overallStats.drawBy.repetition,
-      color: "hsl(113, 70%, 50%)",
-    },
-    {
-      id: "stalemate",
-      label: "stalemate",
-      value: overallStats.drawBy.stalemate,
-      color: "hsl(330, 70%, 50%)",
-    },
-    {
-      id: "insufficient",
-      label: "insufficient",
-      value: overallStats.drawBy.insufficient,
-      color: "hsl(291, 70%, 50%)",
-    },
-    {
-      id: "agreed",
-      label: "agreed",
-      value: overallStats.drawBy.agreed,
-      color: "hsl(291, 70%, 50%)",
-    },
-  ];
+  const [chartData, setChartData] = useState(allChartData);
 
   // Set data in latest matches, best wins and worst loses
+
   let lastGames = [...data.blackandwhite];
   let bestWins = [...data.blackandwhite].filter(
     (item) => item.result === "win"
@@ -110,30 +126,47 @@ const Stats = ({ data }) => {
   return (
     <div className={styles.stats}>
       <div className={styles.card}>
+        <button
+          className="button"
+          onClick={(e) => {
+            setChartData(allChartData);
+          }}
+        >
+          Overall
+        </button>
+        <button
+          className="button"
+          onClick={(e) => {
+            setChartData(whiteChartData);
+          }}
+        >
+          As white
+        </button>
+        <button
+          className="button"
+          onClick={(e) => {
+            setChartData(blackChartData);
+          }}
+        >
+          As black
+        </button>
         <div className={styles.charts}>
           <div className={styles.pie}>
             <h4>Overall</h4>
-            <MyResponsivePie data={pieOverall} />
+            <MyResponsivePie data={chartData.overall} />
           </div>
-          {/* <h4>
-          Wins: {overallStats.wins} Draws: {overallStats.draws} Loses:{" "}
-          {overallStats.loses}
-        </h4> */}
-          {/* <p>
-          Average win: {winsRatings} Average lose: {losesRatings}
-        </p> */}
 
           <div className={styles.pie}>
             <h4>Wins</h4>
-            <MyResponsivePie data={pieWinBy} />
+            <MyResponsivePie data={chartData.wins} />
           </div>
           <div className={styles.pie}>
             <h4>Draws</h4>
-            <MyResponsivePie data={pieDrawBy} />
+            <MyResponsivePie data={chartData.draws} />
           </div>
           <div className={styles.pie}>
             <h4>Loses</h4>
-            <MyResponsivePie data={pieLoseBy} />
+            <MyResponsivePie data={chartData.loses} />
           </div>
         </div>
       </div>
