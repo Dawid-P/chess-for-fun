@@ -12,9 +12,6 @@ const Main = ({ chessData = [] }) => {
   } = useForm();
 
   let [numberOfDownloadedGames, setNNumberOfDownloadedGames] = useState(0);
-  useEffect(() => {
-    setNNumberOfDownloadedGames(chessData.length);
-  }, [chessData.length]);
 
   let [filteredChessData, setFilteredChessData] = useState(null);
 
@@ -73,6 +70,10 @@ const Main = ({ chessData = [] }) => {
 
     setFilteredChessData(finalDataObject);
   };
+
+  useEffect(() => {
+    setNNumberOfDownloadedGames(chessData.length);
+  }, [chessData.length]);
 
   const onSubmit = (formData) => {
     filterChessData(chessData, formData);

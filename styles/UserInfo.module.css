@@ -1,0 +1,21 @@
+.userinfo {
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  gap: 10px;
+}
+
+.infos {
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.infos h2 {
+  margin-right: 120px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

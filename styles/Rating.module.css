@@ -1,0 +1,25 @@
+.rating {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+}
+
+.rating img {
+  margin: 5px;
+  height: 60px;
+  color: white;
+}
+
+.rating section {
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-items: center;
+}
+
+.rating p {
+  margin: 0;
+  padding: 0;
+}
