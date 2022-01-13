@@ -36,7 +36,6 @@ const Rating = ({ type, data }) => {
     data.best.rating = 0;
   }
 
-  console.log(data);
   return (
     <div className={styles.rating}>
       <FontAwesomeIcon icon={icon} size="2x" />

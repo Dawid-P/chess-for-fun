@@ -16,6 +16,7 @@ const UserStats = ({ data, username }) => {
 
   let slicedData = data;
   let id = 1;
+  let userD = {};
 
   // Extract all games for months selected by user
   const fetcher = async (url) => fetch(url).then((res) => res.json());
@@ -23,20 +24,27 @@ const UserStats = ({ data, username }) => {
   async function sequentialCall(slicedData) {
     setDataIsReady(0);
     setFinalData([]);
-    // Variables
-    let games = [];
-    let allGames = [];
+    // User check
+    userD = await fetcher(`https://api.chess.com/pub/player/${username}`);
 
-    for (let item of slicedData) {
-      games = await fetcher(item);
-      allGames.push(...games.games);
+    if (userD.code === 0) {
+      setDataIsReady(0);
+    } else {
+      // Variables
+      let games = [];
+      let allGames = [];
+
+      for (let item of slicedData) {
+        games = await fetcher(item);
+        allGames.push(...games.games);
+      }
+
+      structureChessData(allGames);
+
+      addRatingChange(allGames);
+
+      setFinalData(allGames);
     }
-
-    structureChessData(allGames);
-
-    addRatingChange(allGames);
-
-    setFinalData(allGames);
   }
 
   const matchDate = (ts) => {
@@ -124,7 +132,7 @@ const UserStats = ({ data, username }) => {
       {dataIsReady === 0 ? (
         <>
           <Navbar />
-          <h1>Username does not exist, try again</h1>
+          <h1 className="error">Username does not exist, try again</h1>
         </>
       ) : (
         <>

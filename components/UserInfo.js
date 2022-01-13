@@ -22,11 +22,28 @@ const UserInfo = () => {
   async function getUserData(username) {
     userD = await fetcher(`https://api.chess.com/pub/player/${username}`);
     userS = await fetcher(`https://api.chess.com/pub/player/${username}/stats`);
-    setUserData(userD);
-    setUserStats(userS);
-    setShowStats(1);
+    if (userD.code === 0) {
+      setShowStats(2);
+    } else {
+      setUserData(userD);
+      setUserStats(userS);
+      setShowStats(1);
+    }
   }
-
+  if (showStats === 2) {
+    return (
+      <>
+        <h1 className={styles.error}>User does not exist</h1>
+        <div className={styles.button}>
+          <Link href="/">
+            <a>
+              <button>Back</button>
+            </a>
+          </Link>
+        </div>
+      </>
+    );
+  }
   if (showStats === 1) {
     return (
       <>
