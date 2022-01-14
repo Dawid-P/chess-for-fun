@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "../styles/Stats.module.css";
 import { MyResponsivePie } from "./charts/Pie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChessPawn } from "@fortawesome/free-solid-svg-icons";
 
 const Stats = ({ data }) => {
   function chartProduction(colorStats) {
@@ -184,6 +186,13 @@ const Stats = ({ data }) => {
           <ul>
             {bestWins.map((item) => (
               <li key={item.end_time}>
+                <FontAwesomeIcon
+                  icon={faChessPawn}
+                  className={
+                    item.userColor === "white" ? styles.white : styles.black
+                  }
+                />
+
                 <a href={item.url} rel="noopener noreferrer" target="_blank">
                   {item.matchDate} - {item.opponent.username} (
                   {item.opponent.rating}){" "}
@@ -196,6 +205,12 @@ const Stats = ({ data }) => {
           <ul>
             {worstLoses.map((item) => (
               <li key={item.end_time}>
+                <FontAwesomeIcon
+                  icon={faChessPawn}
+                  className={
+                    item.userColor === "white" ? styles.white : styles.black
+                  }
+                />
                 <a href={item.url} rel="noopener noreferrer" target="_blank">
                   {item.matchDate} - {item.opponent.username} (
                   {item.opponent.rating}){" "}
@@ -208,6 +223,12 @@ const Stats = ({ data }) => {
           <ul>
             {lastGames.map((item) => (
               <li key={item.end_time}>
+                <FontAwesomeIcon
+                  icon={faChessPawn}
+                  className={
+                    item.userColor === "white" ? styles.white : styles.black
+                  }
+                />
                 {item.result} ({item.userRating}) vs {item.opponent.username} (
                 {item.opponent.rating})
               </li>
