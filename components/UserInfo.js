@@ -3,14 +3,25 @@ import styles from "../styles/UserInfo.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Rating from "../components/Rating";
-const UserInfo = () => {
+import Stats from "./Stats";
+const UserInfo = ({ data }) => {
   const router = useRouter();
 
   let userD = {};
   let userS = {};
 
+  let bullet = data.filter((item) => item.time_class === "bullet");
+  let blitz = data.filter((item) => item.time_class === "blitz");
+  let rapid = data.filter((item) => item.time_class === "rapid");
+  let daily = data.filter((item) => item.time_class === "daily");
+  console.log(rapid);
+
+  const [statsData, setStatsData] = useState(blitz);
+  const [statsState, setStatsState] = useState("blitz");
+
   useEffect(() => {
     getUserData(router.query.id);
+    console.log(router.query);
   }, [router.query.id]);
 
   const fetcher = async (url) => fetch(url).then((res) => res.json());
@@ -49,21 +60,58 @@ const UserInfo = () => {
       <>
         <nav className={styles.userinfo}>
           <div className={styles.infos}>
-            <h2>{userData.username}</h2>
+            <div>
+              <h2>{userData.username}</h2>
+              <p>{statsData.length} games played</p>
+              <p>
+                {router.query.from} to {router.query.to}
+              </p>
+            </div>
 
-            <>
+            <button
+              onClick={(e) => {
+                setStatsData(bullet);
+                setStatsState("bullet");
+              }}
+              className={
+                statsState === "bullet" ? styles.selected : styles.unselected
+              }
+            >
               <Rating type={"bullet"} data={userStats} />
-
+            </button>
+            <button
+              onClick={(e) => {
+                setStatsData(blitz);
+                setStatsState("blitz");
+              }}
+              className={
+                statsState === "blitz" ? styles.selected : styles.unselected
+              }
+            >
               <Rating type={"blitz"} data={userStats} />
-
+            </button>
+            <button
+              onClick={(e) => {
+                setStatsData(rapid);
+                setStatsState("rapid");
+              }}
+              className={
+                statsState === "rapid" ? styles.selected : styles.unselected
+              }
+            >
               <Rating type={"rapid"} data={userStats} />
-
+            </button>
+            <button
+              onClick={(e) => {
+                setStatsData(daily);
+                setStatsState("daily");
+              }}
+              className={
+                statsState === "daily" ? styles.selected : styles.unselected
+              }
+            >
               <Rating type={"daily"} data={userStats} />
-            </>
-
-            {/* <h3>Bullet: {userStats?.chess_bullet?.last.rating}</h3>
-            <h3>Blitz: {userStats?.chess_blitz?.last.rating}</h3>
-            <h3>Rapid: {userStats?.chess_rapid?.last.rating}</h3> */}
+            </button>
           </div>
           <div className={styles.button}>
             <Link href="/">
@@ -73,9 +121,10 @@ const UserInfo = () => {
             </Link>
           </div>
         </nav>
+        <Stats data={statsData} />
       </>
     );
-  } else return <h1>Loading user stats</h1>;
+  } else return <></>;
 };
 
 export default UserInfo;

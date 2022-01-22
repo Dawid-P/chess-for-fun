@@ -81,7 +81,7 @@ const Main = ({ chessData = [] }) => {
   return (
     <div className={styles.container}>
       <aside className={styles.aside}>
-        <h1>{0 || numberOfDownloadedGames} games downloaded</h1>
+        <h2>{0 || numberOfDownloadedGames} games downloaded</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <p>Minimum number of games</p>
           <input

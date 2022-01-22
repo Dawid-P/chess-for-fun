@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/Stats.module.css";
 import { MyResponsivePie } from "./charts/Pie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -96,9 +96,9 @@ const Stats = ({ data }) => {
     };
   }
 
-  const blackAndWhite = data.blackandwhite;
-  const white = data.blackandwhite.filter((item) => item.userColor === "white");
-  const black = data.blackandwhite.filter((item) => item.userColor === "black");
+  const blackAndWhite = data;
+  const white = data.filter((item) => item.userColor === "white");
+  const black = data.filter((item) => item.userColor === "black");
   const overallStats = overallStatsCalc(blackAndWhite);
   const blackStats = overallStatsCalc(black);
   const whiteStats = overallStatsCalc(white);
@@ -110,15 +110,15 @@ const Stats = ({ data }) => {
   const [bestDisplay, setBestDisplay] = useState("wins");
   const [chartData, setChartData] = useState(allChartData);
 
+  useEffect(() => {
+    setChartData(allChartData);
+  }, [data]);
+
   // Set data in latest matches, best wins and worst loses
 
-  let lastGames = [...data.blackandwhite];
-  let bestWins = [...data.blackandwhite].filter(
-    (item) => item.result === "win"
-  );
-  let worstLoses = [...data.blackandwhite].filter(
-    (item) => item.result !== "win"
-  );
+  let lastGames = [...data];
+  let bestWins = [...data].filter((item) => item.result === "win");
+  let worstLoses = [...data].filter((item) => item.result !== "win");
   let winsRatings = averageRatings(bestWins).toFixed();
   let losesRatings = averageRatings(worstLoses).toFixed();
   lastGames.sort((a, b) => b.end_time - a.end_time).splice(15);

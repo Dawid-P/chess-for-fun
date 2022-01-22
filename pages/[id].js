@@ -5,6 +5,7 @@ import chessData from "../functions/chessData";
 import router from "next/router";
 import Head from "next/head";
 import UserInfo from "../components/UserInfo";
+import Stats from "../components/Stats";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChess } from "@fortawesome/free-solid-svg-icons";
@@ -24,6 +25,7 @@ const UserStats = ({ data, username }) => {
   async function sequentialCall(slicedData) {
     setDataIsReady(0);
     setFinalData([]);
+
     // User check
     userD = await fetcher(`https://api.chess.com/pub/player/${username}`);
 
@@ -136,14 +138,16 @@ const UserStats = ({ data, username }) => {
         </>
       ) : (
         <>
-          <UserInfo />
           {finalData.length === 0 ? (
             <div className="loader">
               <h3>Loading Games</h3>
               <FontAwesomeIcon icon={faChess} size="10x" />
             </div>
           ) : (
-            <Main chessData={finalData} />
+            <>
+              <UserInfo data={finalData} />
+              <Main chessData={finalData} />
+            </>
           )}
         </>
       )}

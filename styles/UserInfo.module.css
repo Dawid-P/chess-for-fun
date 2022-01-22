@@ -1,26 +1,45 @@
 .userinfo {
+  margin-top: 15px;
   display: grid;
-  grid-template-columns: 10fr 1fr;
+  grid-template-columns: 9fr 2fr;
   gap: 10px;
 }
 
 .infos {
   margin-left: 20px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .infos h2 {
-  margin-right: 120px;
+  /* margin-right: 120px; */
 }
 
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 220px;
+  margin-right: 20px;
 }
 
 .error {
   display: flex;
   justify-content: center;
+}
+.selected,
+.unselected {
+  font-size: medium;
+  font-weight: normal;
+  color: white;
+  border: none;
+  background: none;
+}
+.selected {
+  background-color: none;
+  border: 1px dotted white;
+}
+
+.ratings {
+  display: flex;
 }

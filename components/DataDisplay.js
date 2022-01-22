@@ -1,8 +1,6 @@
 import React from "react";
 import Card from "./Card";
 import styles from "../styles/Card.module.css";
-import { useState, useEffect } from "react";
-import Stats from "./Stats";
 
 const DataDisplay = ({ data }) => {
   let ratingDifference = null;
@@ -72,9 +70,7 @@ const DataDisplay = ({ data }) => {
         </div>
       ) : (
         <div>
-          <div>
-            <Stats data={data} />
-          </div>
+          <div>{/* <Stats data={data} /> */}</div>
           <div className={styles.cards}>
             {ecoArray.map((item) => (
               <Card key={item.name} data={item} />
