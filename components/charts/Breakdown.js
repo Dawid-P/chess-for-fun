@@ -9,6 +9,12 @@ import { ResponsiveBar } from "@nivo/bar";
 // you'll often use just a few of them.
 const theme = {
   axis: {
+    legend: {
+      text: {
+        fontSize: 12,
+        fill: "#999",
+      },
+    },
     fontSize: "50px",
     tickColor: "#eee",
     ticks: {
@@ -53,13 +59,26 @@ export const BreakdownChart = ({ data /* see data tab */ }) => (
       tickRotation: 0,
       legend: "games",
       legendPosition: "middle",
-      legendOffset: 32,
+      legendOffset: 35,
     }}
     axisLeft={{
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
     }}
+    tooltip={({ id, value, color }) => (
+      <div
+        style={{
+          padding: 12,
+          color,
+          background: "#222222",
+        }}
+      >
+        <strong>
+          {id}: {value}
+        </strong>
+      </div>
+    )}
     labelSkipWidth={12}
     labelSkipHeight={12}
     labelTextColor={{
