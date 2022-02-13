@@ -1,8 +1,8 @@
 import React from "react";
 
-export const ratingBreakdown = (blackAndWhite) => {
+export const ratingBreakdown = (data) => {
   // change all outcome types to just three: win, draw, lose
-  blackAndWhite.forEach((item) => {
+  data.forEach((item) => {
     if (
       item.userResult === "stalemate" ||
       item.userResult === "insufficient" ||
@@ -40,7 +40,7 @@ export const ratingBreakdown = (blackAndWhite) => {
     { name: "+2100", low: 2100, high: 5000, win: 0, draw: 0, lose: 0 },
   ];
 
-  for (let item of blackAndWhite) {
+  for (let item of data) {
     levels.forEach((level) => {
       if (
         (item.opponent.rating > level.low) &

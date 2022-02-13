@@ -8,6 +8,11 @@ import { ResponsiveBar } from "@nivo/bar";
 // website examples showcase many properties,
 // you'll often use just a few of them.
 const theme = {
+  grid: {
+    line: {
+      strokeWidth: 0.2,
+    },
+  },
   axis: {
     legend: {
       text: {
