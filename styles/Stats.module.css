@@ -27,6 +27,12 @@
   height: 250px;
 }
 
+.breakdown {
+  grid-column: span 2;
+  height: 300px;
+  margin-bottom: 5rem;
+}
+
 .charts {
   display: grid;
   grid-template-columns: 1fr 1fr;

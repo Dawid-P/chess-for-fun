@@ -14,14 +14,12 @@ const UserInfo = ({ data }) => {
   let blitz = data.filter((item) => item.time_class === "blitz");
   let rapid = data.filter((item) => item.time_class === "rapid");
   let daily = data.filter((item) => item.time_class === "daily");
-  console.log(rapid);
 
   const [statsData, setStatsData] = useState(blitz);
   const [statsState, setStatsState] = useState("blitz");
 
   useEffect(() => {
     getUserData(router.query.id);
-    console.log(router.query);
   }, [router.query.id]);
 
   const fetcher = async (url) => fetch(url).then((res) => res.json());
