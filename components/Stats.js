@@ -4,6 +4,7 @@ import { MyResponsivePie } from "./charts/Pie";
 import { BreakdownChart } from "./charts/Breakdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChessPawn } from "@fortawesome/free-solid-svg-icons";
+import { ratingBreakdown } from "../functions/ratingBreakdown";
 
 const Stats = ({ data }) => {
   function chartProduction(colorStats) {
@@ -135,6 +136,7 @@ const Stats = ({ data }) => {
           className="button"
           onClick={(e) => {
             setChartData(allChartData);
+            setBreakdownData(ratingBreakdown(blackAndWhite));
           }}
         >
           Overall
@@ -143,6 +145,7 @@ const Stats = ({ data }) => {
           className="button"
           onClick={(e) => {
             setChartData(whiteChartData);
+            setBreakdownData(ratingBreakdown(white));
           }}
         >
           As white
@@ -151,6 +154,7 @@ const Stats = ({ data }) => {
           className="button"
           onClick={(e) => {
             setChartData(blackChartData);
+            setBreakdownData(ratingBreakdown(black));
           }}
         >
           As black
@@ -329,134 +333,5 @@ const overallStatsCalc = (matches) => {
 
   return overallStats;
 };
-
-function ratingBreakdown(blackAndWhite) {
-  let to1299 = {
-    name: "<1299",
-    win: 0,
-    draw: 0,
-    lose: 0,
-  };
-  let from1300to1499 = {
-    name: "1300-1499",
-    win: 0,
-    draw: 0,
-    lose: 0,
-  };
-  let from1500to1699 = {
-    name: "1500-1699",
-    win: 0,
-    draw: 0,
-    lose: 0,
-  };
-  let from1700 = {
-    name: "1700>",
-    win: 0,
-    draw: 0,
-    lose: 0,
-  };
-  for (let item of blackAndWhite) {
-    if (item.opponent.rating < 1300) {
-      if (item.userResult === "win") {
-        to1299.win++;
-      }
-      if (
-        item.userResult === "stalemate" ||
-        item.userResult === "insufficient" ||
-        item.userResult === "50move" ||
-        item.userResult === "repetition" ||
-        item.userResult === "agreed" ||
-        item.userResult === "timevsinsufficient"
-      ) {
-        to1299.draw++;
-      }
-      if (
-        item.userResult === "checkmated" ||
-        item.userResult === "timeout" ||
-        item.userResult === "resigned" ||
-        item.userResult === "lose" ||
-        item.userResult === "abandoned"
-      ) {
-        to1299.lose++;
-      }
-    }
-    if ((item.opponent.rating >= 1300) & (item.opponent.rating < 1500)) {
-      if (item.userResult === "win") {
-        from1300to1499.win++;
-      }
-      if (
-        item.userResult === "stalemate" ||
-        item.userResult === "insufficient" ||
-        item.userResult === "50move" ||
-        item.userResult === "repetition" ||
-        item.userResult === "agreed" ||
-        item.userResult === "timevsinsufficient"
-      ) {
-        from1300to1499.draw++;
-      }
-      if (
-        item.userResult === "checkmated" ||
-        item.userResult === "timeout" ||
-        item.userResult === "resigned" ||
-        item.userResult === "lose" ||
-        item.userResult === "abandoned"
-      ) {
-        from1300to1499.lose++;
-      }
-    }
-    if ((item.opponent.rating >= 1500) & (item.opponent.rating < 1700)) {
-      if (item.userResult === "win") {
-        from1500to1699.win++;
-      }
-      if (
-        item.userResult === "stalemate" ||
-        item.userResult === "insufficient" ||
-        item.userResult === "50move" ||
-        item.userResult === "repetition" ||
-        item.userResult === "agreed" ||
-        item.userResult === "timevsinsufficient"
-      ) {
-        from1500to1699.draw++;
-      }
-      if (
-        item.userResult === "checkmated" ||
-        item.userResult === "timeout" ||
-        item.userResult === "resigned" ||
-        item.userResult === "lose" ||
-        item.userResult === "abandoned"
-      ) {
-        from1500to1699.lose++;
-      }
-    }
-    if (item.opponent.rating >= 1700) {
-      if (item.userResult === "win") {
-        from1700.win++;
-      }
-      if (
-        item.userResult === "stalemate" ||
-        item.userResult === "insufficient" ||
-        item.userResult === "50move" ||
-        item.userResult === "repetition" ||
-        item.userResult === "agreed" ||
-        item.userResult === "timevsinsufficient"
-      ) {
-        from1700.draw++;
-      }
-      if (
-        item.userResult === "checkmated" ||
-        item.userResult === "timeout" ||
-        item.userResult === "resigned" ||
-        item.userResult === "lose" ||
-        item.userResult === "abandoned"
-      ) {
-        from1700.lose++;
-      }
-    }
-  }
-
-  let breakdown = [to1299, from1300to1499, from1500to1699, from1700];
-  console.log(breakdown);
-  return breakdown;
-}
 
 export default Stats;
