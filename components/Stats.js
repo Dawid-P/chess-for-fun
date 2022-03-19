@@ -255,7 +255,7 @@ const averageRatings = (games) => {
   const average = (arr) => arr.reduce((p, c) => p + c, 0) / arr.length;
   let ratings = [];
   games.forEach((item) => {
-    ratings.push(item.opponent.rating);
+    ratings.push(item.opponent?.rating);
   });
 
   return average(ratings);
