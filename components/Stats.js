@@ -112,6 +112,8 @@ const Stats = ({ data }) => {
   const [bestDisplay, setBestDisplay] = useState("wins");
   const [chartData, setChartData] = useState(allChartData);
   const [breakdownData, setBreakdownData] = useState({});
+  const [isActive, setIsActive] = useState("wins");
+  const [isActiveCharts, setIsActiveCharts] = useState("overall");
 
   useEffect(() => {
     setChartData(allChartData);
@@ -133,28 +135,37 @@ const Stats = ({ data }) => {
     <div className={styles.stats}>
       <div className={styles.card}>
         <button
-          className="button"
+          className={`button ${
+            isActiveCharts === "overall" ? "activeButton" : ""
+          }`}
           onClick={(e) => {
             setChartData(allChartData);
             setBreakdownData(ratingBreakdown(blackAndWhite));
+            setIsActiveCharts("overall");
           }}
         >
           Overall
         </button>
         <button
-          className="button"
+          className={`button ${
+            isActiveCharts === "white" ? "activeButton" : ""
+          }`}
           onClick={(e) => {
             setChartData(whiteChartData);
             setBreakdownData(ratingBreakdown(white));
+            setIsActiveCharts("white");
           }}
         >
           As white
         </button>
         <button
-          className="button"
+          className={`button ${
+            isActiveCharts === "black" ? "activeButton" : ""
+          }`}
           onClick={(e) => {
             setChartData(blackChartData);
             setBreakdownData(ratingBreakdown(black));
+            setIsActiveCharts("black");
           }}
         >
           As black
@@ -184,13 +195,31 @@ const Stats = ({ data }) => {
         </div>
       </div>
       <div className={styles.card}>
-        <button className="button" onClick={(e) => setBestDisplay("wins")}>
+        <button
+          className={`button ${isActive === "wins" ? "activeButton" : ""}`}
+          onClick={(e) => {
+            setBestDisplay("wins");
+            setIsActive("wins");
+          }}
+        >
           Best wins
         </button>
-        <button className="button" onClick={(e) => setBestDisplay("loses")}>
+        <button
+          className={`button ${isActive === "loses" ? "activeButton" : ""}`}
+          onClick={(e) => {
+            setBestDisplay("loses");
+            setIsActive("loses");
+          }}
+        >
           Worst loses
         </button>
-        <button className="button" onClick={(e) => setBestDisplay("latest")}>
+        <button
+          className={`button ${isActive === "latest" ? "activeButton" : ""}`}
+          onClick={(e) => {
+            setBestDisplay("latest");
+            setIsActive("latest");
+          }}
+        >
           Latest matches
         </button>
         {bestDisplay === "wins" && (

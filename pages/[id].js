@@ -65,35 +65,33 @@ const UserStats = ({ data, username }) => {
   // Structure data for frontend
   async function structureChessData(allGames) {
     for (let item of allGames) {
-      if (item.rules === "chess") {
-        let [pgnView] = pgnParser.parse(item.pgn);
-        item.ECO = pgnView?.headers[9].value;
-        item.opening = pgnView?.headers[10].value;
+      let [pgnView] = pgnParser.parse(item.pgn);
+      item.ECO = pgnView.headers[9].value;
+      item.opening = pgnView.headers[10].value;
 
-        item.id = id;
-        delete item.pgn;
-        item.user = username.toLowerCase();
-        item.matchDate = matchDate(item.end_time);
+      item.id = id;
+      delete item.pgn;
+      item.user = username.toLowerCase();
+      item.matchDate = matchDate(item.end_time);
 
-        if (item.white.username.toLowerCase() === username) {
-          item.userColor = "white";
-          item.userResult = item.white.result;
-          item.userRating = item.white?.rating;
-          item.opponent = item.black;
-          item.result = item.white.result;
-        }
-        if (item.black.username.toLowerCase() === username) {
-          item.userColor = "black";
-          item.userResult = item.black.result;
-          item.userRating = item.black?.rating;
-          item.opponent = item.white;
-          item.result = item.black.result;
-        }
-        delete item.black;
-        delete item.white;
-        item.accuracies && delete item.accuracies;
-        id++;
+      if (item.white.username.toLowerCase() === username) {
+        item.userColor = "white";
+        item.userResult = item.white.result;
+        item.userRating = item.white.rating;
+        item.opponent = item.black;
+        item.result = item.white.result;
       }
+      if (item.black.username.toLowerCase() === username) {
+        item.userColor = "black";
+        item.userResult = item.black.result;
+        item.userRating = item.black.rating;
+        item.opponent = item.white;
+        item.result = item.black.result;
+      }
+      delete item.black;
+      delete item.white;
+      item.accuracies && delete item.accuracies;
+      id++;
     }
   }
 

@@ -77,3 +77,7 @@ input[type="submit"] {
   display: flex;
   justify-content: center;
 }
+
+.activeButton {
+  font-weight: bolder;
+}
