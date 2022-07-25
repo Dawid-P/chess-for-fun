@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Main from "../components/Main";
 import chessData from "../functions/chessData";
-import router from "next/router";
 import Head from "next/head";
 import UserInfo from "../components/UserInfo";
-import Stats from "../components/Stats";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChess } from "@fortawesome/free-solid-svg-icons";
 const pgnParser = require("pgn-parser");

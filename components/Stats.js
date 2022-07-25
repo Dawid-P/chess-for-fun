@@ -269,8 +269,10 @@ const Stats = ({ data }) => {
                     item.userColor === "white" ? styles.white : styles.black
                   }
                 />
-                {item.result} ({item.userRating}) vs {item.opponent.username} (
-                {item.opponent.rating})
+                <a href={item.url} rel="noopener noreferrer" target="_blank">
+                  {item.result} ({item.userRating}) vs {item.opponent.username}{" "}
+                  ({item.opponent.rating})
+                </a>
               </li>
             ))}
           </ul>
