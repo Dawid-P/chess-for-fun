@@ -118,13 +118,28 @@ const Stats = ({ data }) => {
   useEffect(() => {
     setChartData(allChartData);
     setBreakdownData(ratingBreakdown(blackAndWhite));
+  
   }, [data]);
 
-  // Set data in latest matches, best wins and worst loses
+  // Set data in latest matches, best wins and worst loses and opponents
+ function opponents(data){
+  let opponentsArray = [];
+  data.forEach(item=>opponentsArray.push(item.opponent.username));
+  let obj = opponentsArray.reduce((acc, curr) => (acc[curr] = (acc[curr] || 0) + 1, acc), {});
+  let sortable = [];
+  for (const opponent in obj) {
+    sortable.push([opponent, obj[opponent]]);
+}
 
+sortable.sort(function(a, b) {
+    return b[1] - a[1];
+});
+  return sortable.slice(0,10)
+ }
   let lastGames = [...data];
   let bestWins = [...data].filter((item) => item.result === "win");
   let worstLoses = [...data].filter((item) => item.result !== "win");
+  let commonOpponents = opponents(data)
   let winsRatings = averageRatings(bestWins).toFixed();
   let losesRatings = averageRatings(worstLoses).toFixed();
   lastGames.sort((a, b) => b.end_time - a.end_time).splice(15);
@@ -222,6 +237,15 @@ const Stats = ({ data }) => {
         >
           Latest matches
         </button>
+        <button
+          className={`button ${isActive === "opponents" ? "activeButton" : ""}`}
+          onClick={(e) => {
+            setBestDisplay("opponents");
+            setIsActive("opponents");
+          }}
+        >
+          Opponents
+        </button>
         {bestDisplay === "wins" && (
           <ul>
             {bestWins.map((item) => (
@@ -272,6 +296,23 @@ const Stats = ({ data }) => {
                 <a href={item.url} rel="noopener noreferrer" target="_blank">
                   {item.result} ({item.userRating}) vs {item.opponent.username}{" "}
                   ({item.opponent.rating})
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {bestDisplay === "opponents" && (
+          <ul>
+            {commonOpponents.map((item) => (
+              <li key={item[0]}>
+                <FontAwesomeIcon
+                  icon={faChessPawn}
+                  className=
+                    {styles.white}
+                  
+                />
+                <a href={`https://www.chess.com/member/${item[0]}`} rel="noopener noreferrer" target="_blank">
+                 {item[1]}:  {item[0]}
                 </a>
               </li>
             ))}
