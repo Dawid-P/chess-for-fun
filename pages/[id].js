@@ -19,6 +19,15 @@ const UserStats = ({ data, username }) => {
   // Extract all games for months selected by user
   const fetcher = async (url) => fetch(url).then((res) => res.json());
 
+  // Function to make API calls
+  async function fetchData(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+
+
   async function sequentialCall(slicedData) {
     setDataIsReady(0);
     setFinalData([]);
@@ -30,14 +39,20 @@ const UserStats = ({ data, username }) => {
       setDataIsReady(0);
     } else {
       // Variables
-      let games = [];
       let nonFilteredGames = [];
       let allGames = [];
 
-      for (let item of slicedData) {
-        games = await fetcher(item);
-        nonFilteredGames.push(...games.games);
-      }
+      // Use Promise.all() to make all API calls concurrently
+      await Promise.all(slicedData.map(url => fetchData(url)))
+      .then(data => {
+        // data is an array of responses from all API calls
+        data.forEach(item=>{
+          nonFilteredGames.push(...item.games)
+        })
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
       for (let item of nonFilteredGames) {
         if (item.rules === "chess") {
@@ -45,11 +60,14 @@ const UserStats = ({ data, username }) => {
         }
       }
 
+
       structureChessData(allGames);
 
       addRatingChange(allGames);
 
       setFinalData(allGames);
+
+
     }
   }
 

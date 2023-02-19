@@ -1,8 +1,5 @@
 import React from "react";
 import styles from "../styles/Card.module.css";
-import { Chessboard } from "react-chessboard";
-import ecoData from "../functions/ecoData";
-import Games from "./Games";
 
 const Card = ({ data }) => {
   let games = data.games;
@@ -31,14 +28,6 @@ const Card = ({ data }) => {
         {ratingPerGame > 0 ? `+${ratingPerGame}` : ratingPerGame} points per
         game
       </p>
-      {/* <Chessboard
-        id="BasicBoard"
-        position={fen.fen}
-        arePiecesDraggable={false}
-        boardWidth={200}
-        boardOrientation={userColor}
-      /> */}
-      <Games data={data.games} />
     </div>
   );
 };
