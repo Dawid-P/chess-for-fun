@@ -60,14 +60,11 @@ const UserStats = ({ data, username }) => {
         }
       }
 
-
       structureChessData(allGames);
 
       addRatingChange(allGames);
 
       setFinalData(allGames);
-
-
     }
   }
 
