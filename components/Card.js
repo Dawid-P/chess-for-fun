@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/Card.module.css";
+import ecoData from "../functions/ecoData"
 
 const Card = ({ data }) => {
   let games = data.games;
