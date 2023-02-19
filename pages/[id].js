@@ -42,17 +42,30 @@ const UserStats = ({ data, username }) => {
       let nonFilteredGames = [];
       let allGames = [];
 
-      // Use Promise.all() to make all API calls concurrently
-      await Promise.all(slicedData.map(url => fetchData(url)))
-      .then(data => {
-        // data is an array of responses from all API calls
-        data.forEach(item=>{
-          nonFilteredGames.push(...item.games)
-        })
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      // // Use Promise.all() to make all API calls concurrently
+      // await Promise.all(slicedData.map(url => fetchData(url)))
+      // .then(data => {
+      //   // data is an array of responses from all API calls
+      //   data.forEach(item=>{
+      //     nonFilteredGames.push(...item.games)
+      //   })
+      // })
+      // .catch(error => {
+      //   console.log(error.code)
+      //   console.error(error);
+      // });
+
+       // Make API calls sequentially with error handling
+      for (let url of slicedData) {
+      try {
+        const data = await fetchData(url);
+        nonFilteredGames.push(...data.games);
+        console.log('Fetched ', url)
+      } catch (error) {
+        console.error(`Error fetching data from ${url}: ${error.message}`);
+      }
+    }
+
 
       for (let item of nonFilteredGames) {
         if (item.rules === "chess") {
