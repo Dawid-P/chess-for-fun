@@ -34,14 +34,14 @@ const Navbar = () => {
     <>
       <nav className={styles.navbar}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Username</label>
+          <label>Chess.com username</label>
           <input
             defaultValue={defaultUsername}
             {...register("username", { required: true })}
           />
           {errors.username?.type === "required" && "Username is required"}
 
-          <label>From</label>
+          <label>Games from</label>
           <input
             defaultValue={defaultToDate()}
             type="month"
@@ -54,7 +54,7 @@ const Navbar = () => {
             {...register("dateTo", { required: true })}
           />
           <button className={styles.submit} type="submit">
-            Download games
+            Show games
           </button>
         </form>
       </nav>
