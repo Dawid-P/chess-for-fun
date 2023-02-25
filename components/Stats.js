@@ -186,10 +186,12 @@ sortable.sort(function(a, b) {
           As black
         </button>
         <div className={styles.charts}>
+
           <div className={styles.breakdown}>
             <h4>Breakdown by rating</h4>
             <BreakdownChart data={breakdownData} />
           </div>
+
           <div className={styles.pie}>
             <h4>Overall</h4>
             <MyResponsivePie data={chartData.overall} />
@@ -199,14 +201,17 @@ sortable.sort(function(a, b) {
             <h4>Wins</h4>
             <MyResponsivePie data={chartData.wins} />
           </div>
+
           <div className={styles.pie}>
             <h4>Draws</h4>
             <MyResponsivePie data={chartData.draws} />
           </div>
+
           <div className={styles.pie}>
             <h4>Loses</h4>
             <MyResponsivePie data={chartData.loses} />
           </div>
+          
         </div>
       </div>
       <div className={styles.card}>
