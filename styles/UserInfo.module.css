@@ -43,3 +43,16 @@
 .ratings {
   display: flex;
 }
+
+@media (max-width: 1000px) {
+  .userinfo {
+    border: red 1px solid;
+    display: flex;
+    flex-direction: column;
+  }
+  .infos {
+    border: green solid 1px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

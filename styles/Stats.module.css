@@ -7,6 +7,17 @@
   gap: 10px;
 }
 
+@media (max-width: 1000px) {
+  .stats {
+    border: red 1px solid;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+ .charts {
+  grid-template-columns: 1fr;
+ }
+}
+
 .card {
   background-color: #26474a;
   color: #fff;

@@ -1,10 +1,31 @@
 .navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75px;
   border-bottom: 1px solid #185157;
 }
 .navbar form {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 1000px) {
+  .navbar {
+    height: auto;
+    border: 1px solid green;
+  }
+  .navbar form {
+    padding-left: 10px;
+    width: 100%;
+    border: red solid 1px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .submit {
+    margin-top: 15px;
+  }
 }
 
 .navbar label {
@@ -21,4 +42,14 @@
 
 .submit {
   margin-left: 10px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 11px;
+}
+
+.divWithError {
+  display: flex;
+  flex-direction: column;
 }

@@ -5,7 +5,7 @@ import { useLocalStorage } from "./useLocalStorage";
 
 const Navbar = () => {
   const router = useRouter();
-
+  const onlyLettersAndDigits = /^[a-zA-Z0-9]+$/;
   const defaultToDate = () => {
     let d = new Date();
     let year = d.getFullYear();
@@ -36,11 +36,18 @@ const Navbar = () => {
       <nav className={styles.navbar}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Chess.com username</label>
+          <div className={styles.divWithError}>
           <input
             defaultValue={defaultUsername}
-            {...register("username", { required: true })}
+            {...register("username", { required: true,
+            pattern: onlyLettersAndDigits })}
           />
-          {errors.username?.type === "required" && "Username is required"}
+         {errors.username && errors.username.type === "required" && (
+        <span className={styles.errorMessage}>This field is required</span>
+      )}
+           {errors.username && errors.username.type === "pattern" && (
+        <span className={styles.errorMessage}>Only letters and digits are allowed</span>
+      )}</div>
 
           <label>Games from</label>
           <input
@@ -48,7 +55,7 @@ const Navbar = () => {
             type="month"
             {...register("dateFrom", { required: true })}
           />
-          <label>To</label>
+          <label>to</label>
           <input
             defaultValue={defaultToDate()}
             type="month"
