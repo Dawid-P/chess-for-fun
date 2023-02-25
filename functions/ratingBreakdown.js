@@ -57,6 +57,6 @@ export const ratingBreakdown = (data) => {
     });
   }
   const filteredLevels = levels.filter(item => item.win+item.draw+item.lose !== 0);
-  console.log(levels)
+
   return filteredLevels;
 };

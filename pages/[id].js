@@ -60,7 +60,6 @@ const UserStats = ({ data, username }) => {
       try {
         const data = await fetchData(url);
         nonFilteredGames.push(...data.games);
-        console.log('Fetched ', url)
       } catch (error) {
         console.error(`Error fetching data from ${url}: ${error.message}`);
       }
