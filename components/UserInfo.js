@@ -65,7 +65,7 @@ const UserInfo = ({ data }) => {
                 {router.query.from} to {router.query.to}
               </p>
             </div>
-
+      <div className={styles.ratingButtons}>
             <button
               onClick={(e) => {
                 setStatsData(bullet);
@@ -110,6 +110,7 @@ const UserInfo = ({ data }) => {
             >
               <Rating type={"daily"} data={userStats} />
             </button>
+            </div>
           </div>
           <div className={styles.button}>
             <Link href="/">

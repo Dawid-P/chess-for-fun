@@ -14,12 +14,12 @@
 @media (max-width: 1000px) {
   .navbar {
     height: auto;
-    border: 1px solid green;
+  
   }
   .navbar form {
     padding-left: 10px;
     width: 100%;
-    border: red solid 1px;
+    
     flex-direction: column;
     align-items: flex-start;
   }
