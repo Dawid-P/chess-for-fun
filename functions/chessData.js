@@ -4,12 +4,13 @@ const chessData = async (json, dateFrom, dateTo, username) => {
   dateFrom = dateFrom.replace("-", "/");
   dateTo = dateTo.replace("-", "/");
   let data = [...json.archives];
+  username.toLowerCase();
   let dateFromIndex = data.indexOf(
-    `https://api.chess.com/pub/player/${username}/games/${dateFrom}`
+    `https://api.chess.com/pub/player/${username.toLowerCase()}/games/${dateFrom}`
   );
 
   let dateToIndex = data.indexOf(
-    `https://api.chess.com/pub/player/${username}/games/${dateTo}`
+    `https://api.chess.com/pub/player/${username.toLowerCase()}/games/${dateTo}`
   );
 
   if (dateFromIndex === -1) {
@@ -29,7 +30,7 @@ const chessData = async (json, dateFrom, dateTo, username) => {
       }
 
       dateFromIndex = data.indexOf(
-        `https://api.chess.com/pub/player/${username}/games/${year}/${month}`
+        `https://api.chess.com/pub/player/${username.toLowerCase()}/games/${year}/${month}`
       );
     }
   }
@@ -51,7 +52,7 @@ const chessData = async (json, dateFrom, dateTo, username) => {
       }
 
       dateToIndex = data.indexOf(
-        `https://api.chess.com/pub/player/${username}/games/${year}/${month}`
+        `https://api.chess.com/pub/player/${username.toLowerCase()}/games/${year}/${month}`
       );
     }
   }

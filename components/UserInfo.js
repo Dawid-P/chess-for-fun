@@ -29,8 +29,8 @@ const UserInfo = ({ data }) => {
   const [showStats, setShowStats] = useState(0);
 
   async function getUserData(username) {
-    userD = await fetcher(`https://api.chess.com/pub/player/${username}`);
-    userS = await fetcher(`https://api.chess.com/pub/player/${username}/stats`);
+    userD = await fetcher(`https://api.chess.com/pub/player/${username.toLowerCase()}`);
+    userS = await fetcher(`https://api.chess.com/pub/player/${username.toLowerCase()}/stats`);
     if (userD.code === 0) {
       setShowStats(2);
     } else {

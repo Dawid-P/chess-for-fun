@@ -25,8 +25,9 @@ const Navbar = () => {
   } = useForm();
 
   const onSubmit = ({ username, dateFrom, dateTo }) => {
+    username.toLowerCase();
     setDefaultUsername(username);
-    let goToStatsPage = `/${username}?from=${dateFrom}&to=${dateTo}`;
+    let goToStatsPage = `/${username.toLowerCase()}?from=${dateFrom}&to=${dateTo}`;
     router.push(goToStatsPage);
   };
 
