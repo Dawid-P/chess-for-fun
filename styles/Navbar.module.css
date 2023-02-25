@@ -1,4 +1,8 @@
 .navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75px;
   border-bottom: 1px solid #185157;
 }
 .navbar form {
@@ -21,4 +25,14 @@
 
 .submit {
   margin-left: 10px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 11px;
+}
+
+.divWithError {
+  display: flex;
+  flex-direction: column;
 }
