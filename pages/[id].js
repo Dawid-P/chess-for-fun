@@ -11,7 +11,7 @@ const pgnParser = require("pgn-parser");
 const UserStats = ({ data, username }) => {
   let [dataIsReady, setDataIsReady] = useState(0);
   let [finalData, setFinalData] = useState([]);
-
+  username.toLowerCase();
   let slicedData = data;
   let id = 1;
   let userD = {};
@@ -33,7 +33,7 @@ const UserStats = ({ data, username }) => {
     setFinalData([]);
 
     // User check
-    userD = await fetcher(`https://api.chess.com/pub/player/${username}`);
+    userD = await fetcher(`https://api.chess.com/pub/player/${username.toLowerCase()}`);
 
     if (userD.code === 0) {
       setDataIsReady(0);
@@ -196,7 +196,7 @@ export async function getServerSideProps({ params, query }) {
   let dateTo = query.to;
 
   let response = await fetch(
-    `https://api.chess.com/pub/player/${username}/games/archives`
+    `https://api.chess.com/pub/player/${username.toLowerCase()}/games/archives`
   );
   if (response.ok) {
     let json = await response.json();
