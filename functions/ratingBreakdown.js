@@ -45,7 +45,10 @@ export const ratingBreakdown = (data) => {
 
   for (let item of data) {
     levels.forEach((level) => {
-      if (item.opponent.rating >= level.low && item.opponent.rating <= level.high) {
+      if (
+        item.opponent.rating >= level.low &&
+        item.opponent.rating <= level.high
+      ) {
         if (item.userResult === "win") {
           level.win++;
         } else if (item.userResult === "draw") {
@@ -56,7 +59,9 @@ export const ratingBreakdown = (data) => {
       }
     });
   }
-  const filteredLevels = levels.filter(item => item.win+item.draw+item.lose !== 0);
+  const filteredLevels = levels.filter(
+    (item) => item.win + item.draw + item.lose !== 0
+  );
 
   return filteredLevels;
 };
